@@ -79,6 +79,7 @@ RDEPENDS_task-boot-gumstix = "\
     angstrom-version \
     ipkg ipkg-collateral \
     util-linux-mount util-linux-umount \
+    pxaregs \
     ${@base_contains("MACHINE_FEATURES", "screen", "psplash", "",d)} \   
     ${DEBUG_APPS} \
     ${DISTRO_DEV_MANAGER} \
