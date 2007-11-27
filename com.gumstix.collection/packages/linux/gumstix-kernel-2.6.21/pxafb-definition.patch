@@ -49,7 +49,7 @@ Index: linux-2.6.21gum/arch/arm/mach-pxa/gumstix.c
 +	.modes		= &gumstix_fb_mode,
 +	.num_modes	= 1,
 +	.lccr0		= LCCR0_Pas | LCCR0_Sngl | LCCR0_Color,
-+	.lccr3		= 0,
++	.lccr3		= LCCR3_PixFlEdg,
 +};
 +#elif defined(CONFIG_FB_PXA_SHARP_LQ043_PSP)
 +static struct pxafb_mode_info gumstix_fb_mode = {
