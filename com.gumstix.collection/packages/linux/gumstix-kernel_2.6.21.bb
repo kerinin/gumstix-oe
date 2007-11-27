@@ -2,6 +2,8 @@ require gumstix-linux.inc
 
 SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
        file://defconfig \
+       file://tsc2003.c \
+       file://tsc2003-config.diff;patch=1 \
        file://pxa-regs-additions.patch;patch=1 \
        file://header.patch;patch=1 \
        file://arch-config.patch;patch=1 \
@@ -46,3 +48,6 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
        file://smc911x-fixup.patch;patch=1 \
        "
 
+do_configure_prepend() {
+        cp ${WORKDIR}/tsc2003.c ${S}/drivers/i2c/chips/
+}
