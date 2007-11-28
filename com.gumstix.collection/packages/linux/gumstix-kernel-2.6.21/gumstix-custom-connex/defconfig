@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.21
-# Sun Oct  7 16:20:19 2007
+# Tue Nov 27 15:25:30 2007
 #
 CONFIG_ARM=y
 CONFIG_SYS_SUPPORTS_APM_EMULATION=y
@@ -652,8 +652,6 @@ CONFIG_MTD_GUMSTIX=y
 #
 # Self-contained MTD device drivers
 #
-# CONFIG_MTD_DATAFLASH is not set
-# CONFIG_MTD_M25P80 is not set
 # CONFIG_MTD_SLRAM is not set
 # CONFIG_MTD_PHRAM is not set
 # CONFIG_MTD_MTDRAM is not set
@@ -908,7 +906,7 @@ CONFIG_SLHC=m
 #
 # Input device support
 #
-CONFIG_INPUT=m
+CONFIG_INPUT=y
 # CONFIG_INPUT_FF_MEMLESS is not set
 
 #
@@ -929,7 +927,6 @@ CONFIG_INPUT_EVDEV=m
 # CONFIG_INPUT_MOUSE is not set
 # CONFIG_INPUT_JOYSTICK is not set
 CONFIG_INPUT_TOUCHSCREEN=y
-# CONFIG_TOUCHSCREEN_ADS7846 is not set
 # CONFIG_TOUCHSCREEN_GUNZE is not set
 # CONFIG_TOUCHSCREEN_ELO is not set
 # CONFIG_TOUCHSCREEN_MTOUCH is not set
@@ -949,7 +946,10 @@ CONFIG_TOUCHSCREEN_UCB1400=m
 #
 # Character devices
 #
-# CONFIG_VT is not set
+CONFIG_VT=y
+CONFIG_VT_CONSOLE=y
+CONFIG_HW_CONSOLE=y
+CONFIG_VT_HW_CONSOLE_BINDING=y
 # CONFIG_SERIAL_NONSTANDARD is not set
 
 #
@@ -1034,6 +1034,7 @@ CONFIG_I2C_PXA_SLAVE=y
 # CONFIG_SENSORS_PCA9539 is not set
 # CONFIG_SENSORS_PCF8591 is not set
 # CONFIG_SENSORS_MAX6875 is not set
+# CONFIG_SENSORS_TSC2003 is not set
 # CONFIG_I2C_DEBUG_CORE is not set
 # CONFIG_I2C_DEBUG_ALGO is not set
 # CONFIG_I2C_DEBUG_BUS is not set
@@ -1043,19 +1044,7 @@ CONFIG_I2C_PXA_SLAVE=y
 # SPI support
 #
 # CONFIG_SPI is not set
-# CONFIG_SPI_DEBUG is not set
 # CONFIG_SPI_MASTER is not set
-
-#
-# SPI Master Controller Drivers
-#
-# CONFIG_SPI_BITBANG is not set
-# CONFIG_SPI_PXA2XX is not set
-
-#
-# SPI Protocol Masters
-#
-# CONFIG_SPI_AT25 is not set
 
 #
 # Dallas's 1-wire bus
@@ -1104,12 +1093,12 @@ CONFIG_I2C_PXA_SLAVE=y
 # Graphics support
 #
 # CONFIG_BACKLIGHT_LCD_SUPPORT is not set
-CONFIG_FB=m
+CONFIG_FB=y
 # CONFIG_FIRMWARE_EDID is not set
 # CONFIG_FB_DDC is not set
-CONFIG_FB_CFB_FILLRECT=m
-CONFIG_FB_CFB_COPYAREA=m
-CONFIG_FB_CFB_IMAGEBLIT=m
+CONFIG_FB_CFB_FILLRECT=y
+CONFIG_FB_CFB_COPYAREA=y
+CONFIG_FB_CFB_IMAGEBLIT=y
 # CONFIG_FB_SVGALIB is not set
 # CONFIG_FB_MACMODES is not set
 # CONFIG_FB_BACKLIGHT is not set
@@ -1120,14 +1109,33 @@ CONFIG_FB_CFB_IMAGEBLIT=m
 # Frame buffer hardware drivers
 #
 # CONFIG_FB_S1D13XXX is not set
-CONFIG_FB_PXA=m
+CONFIG_FB_PXA=y
 # CONFIG_FB_PXA_ALPS_CDOLLAR is not set
-CONFIG_FB_PXA_SHARP_LQ043_PSP=y
-# CONFIG_FB_PXA_SAMSUNG_LTE430WQ_F0C is not set
+# CONFIG_FB_PXA_SHARP_LQ043_PSP is not set
+CONFIG_FB_PXA_SAMSUNG_LTE430WQ_F0C=y
 # CONFIG_FB_PXA_NONEOFTHEABOVE is not set
 CONFIG_FB_PXA_PARAMETERS=y
 # CONFIG_FB_MBX is not set
 # CONFIG_FB_VIRTUAL is not set
+
+#
+# Console display driver support
+#
+# CONFIG_VGA_CONSOLE is not set
+CONFIG_DUMMY_CONSOLE=y
+CONFIG_FRAMEBUFFER_CONSOLE=y
+CONFIG_FRAMEBUFFER_CONSOLE_ROTATION=y
+CONFIG_FONTS=y
+# CONFIG_FONT_8x8 is not set
+# CONFIG_FONT_8x16 is not set
+# CONFIG_FONT_6x11 is not set
+CONFIG_FONT_7x14=y
+# CONFIG_FONT_PEARL_8x8 is not set
+# CONFIG_FONT_ACORN_8x8 is not set
+# CONFIG_FONT_MINI_4x6 is not set
+# CONFIG_FONT_SUN8x16 is not set
+# CONFIG_FONT_SUN12x22 is not set
+# CONFIG_FONT_10x18 is not set
 
 #
 # Logo configuration
@@ -1286,18 +1294,18 @@ CONFIG_RTC_INTF_DEV=m
 # CONFIG_RTC_DRV_DS1672 is not set
 # CONFIG_RTC_DRV_DS1742 is not set
 # CONFIG_RTC_DRV_PCF8563 is not set
-# CONFIG_RTC_DRV_RS5C348 is not set
 # CONFIG_RTC_DRV_RS5C372 is not set
 # CONFIG_RTC_DRV_M48T86 is not set
 CONFIG_RTC_DRV_SA1100=m
 # CONFIG_RTC_DRV_TEST is not set
-# CONFIG_RTC_DRV_MAX6902 is not set
 # CONFIG_RTC_DRV_V3020 is not set
 
 #
 # File systems
 #
-# CONFIG_EXT2_FS is not set
+CONFIG_EXT2_FS=m
+# CONFIG_EXT2_FS_XATTR is not set
+# CONFIG_EXT2_FS_XIP is not set
 CONFIG_EXT3_FS=m
 # CONFIG_EXT3_FS_XATTR is not set
 # CONFIG_EXT4DEV_FS is not set
