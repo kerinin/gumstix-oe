@@ -1166,7 +1166,10 @@ CONFIG_FONT_7x14=y
 #
 # Logo configuration
 #
-# CONFIG_LOGO is not set
+CONFIG_LOGO=y
+# CONFIG_LOGO_LINUX_MONO is not set
+# CONFIG_LOGO_LINUX_VGA16 is not set
+CONFIG_LOGO_LINUX_CLUT224=y
 
 #
 # Sound
