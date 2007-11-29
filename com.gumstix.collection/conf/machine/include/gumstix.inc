@@ -20,7 +20,6 @@ IMAGE_FSTYPES = "jffs2"
 EXTRA_IMAGECMD_jffs2 = "--little-endian --eraseblock=0x20000 --squash-uids"
 
 SERIAL_CONSOLE = "115200 ttyS0 vt100"
-USE_VT = "0"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS =     " \
                                        "
