@@ -80,7 +80,6 @@ RDEPENDS_task-boot-gumstix = "\
     ipkg ipkg-collateral \
     util-linux-mount util-linux-umount \
     pxaregs \
-    ${@base_contains("MACHINE_FEATURES", "screen", "psplash", "",d)} \   
     ${DEBUG_APPS} \
     ${DISTRO_DEV_MANAGER} \
     ${DISTRO_INIT_MANAGER} \
@@ -246,6 +245,7 @@ RDEPENDS_task-base-gumstix-touchscreen = "\
     "
 
 RRECOMMENDS_task-base-gumstix-touchscreen = "\
+    kernel-module-tsc2003 \
     kernel-module-ucb1400-ts \
     kernel-module-evdev \
     "
