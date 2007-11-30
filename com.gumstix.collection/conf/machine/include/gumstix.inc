@@ -10,6 +10,7 @@ PACKAGE_EXTRA_ARCHS = "armv4 armv4t armv5e armv5te "
 PREFERRED_PROVIDER_virtual/kernel = "gumstix-kernel"
 KERNEL_IMAGETYPE = "uImage"
 RDEPENDS_kernel-base = ""
+KERNEL_IMAGE_MAXSIZE = "1048577
 
 UBOOT_ENTRYPOINT = "a0008000"
 
