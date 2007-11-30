@@ -1,0 +1,103 @@
+#!/bin/sh
+#
+# Start/stop the Bluetooth daemons
+#
+
+set -e
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+NAME=bluetooth
+DESC="Bluetooth subsystem"
+
+HCIATTACH_NAME=hciattach
+HCID_NAME=hcid
+RFCOMM_NAME=rfcomm
+RFCOMM_LISTEN_NAME=rfcomm-listen
+RFCOMM_GETTY_NAME=rfcomm-getty
+RFCOMM_LISTEN=/etc/bluetooth/rfcomm/rfcomm-listen
+RFCOMM_GETTY=/etc/bluetooth/rfcomm/rfcomm-getty
+PAND_NAME=pand
+DUND_NAME=dund
+
+HCIATTACH_EXEC="`which $HCIATTACH_NAME || true`"
+HCID_EXEC="`which $HCID_NAME || true`"
+RFCOMM_EXEC="`which $RFCOMM_NAME || true`"
+PAND_EXEC="`which $PAND_NAME || true`"
+DUND_EXEC="`which $DUND_NAME || true`"
+
+HCID_ENABLE=true
+RFCOMM_ENABLE=true
+DUND_ENABLE=false
+PAND_ENABLE=false
+
+HCID_CONFIG="/etc/bluetooth/hcid.conf"
+RFCOMM_CONFIG="/etc/bluetooth/rfcomm.conf"
+
+HIDD_OPTIONS=""
+DUND_OPTIONS=""
+PAND_OPTIONS=""
+
+[ -e /etc/default/bluetooth ] && . /etc/default/bluetooth
+
+case "$1" in
+  start)
+	echo -n "Starting 32kHz clock..."
+	/usr/sbin/pxaregs OSCC_OON 1
+	while /usr/sbin/pxaregs OSCC_OOK | tail -n 1 | grep -q -v 1;do
+		echo -n '.'
+		sleep 1
+	done
+	echo "Settled"
+
+	/sbin/modprobe gumstix_bluetooth
+	/sbin/modprobe proc_gpio
+	echo AF1 out > /proc/gpio/GPIO12
+
+	echo -n "Starting $DESC:"
+	if $HCIATTACH_ENABLE && [ -x "$HCIATTACH_EXEC" ] ; then
+		$HCIATTACH_EXEC -s $HCIATTACH_START_SPEED $HCIATTACH_TTY $HCIATTACH_TYPE $HCIATTACH_SPEED $HCIATTACH_HANDSHAKE
+		echo -n " $HCIATTACH_TTY"
+	fi
+	if $HCID_ENABLE && [ -x "$HCID_EXEC" -a -f "$HCID_CONFIG" ] ; then
+		$HCID_EXEC -s -f $HCID_CONFIG
+		echo -n " $HCID_NAME"
+	fi
+	if $RFCOMM_ENABLE && [ -x "$RFCOMM_EXEC" -a -f "$RFCOMM_CONFIG" ] ; then
+		/usr/bin/sdptool add --channel=1 SP > /dev/null 2>&1
+		$RFCOMM_LISTEN $RFCOMM_EXEC $RFCOMM_CONFIG > /dev/null 2>&1 &
+		$RFCOMM_GETTY > /dev/null 2>&1 &
+		echo -n " $RFCOMM_NAME"
+	fi
+	if $DUND_ENABLE && [ -x "$DUND_EXEC" -a -n "$DUND_OPTIONS" ] ; then
+		$DUND_EXEC $DUND_OPTIONS
+		echo -n " $DUND_NAME"
+	fi
+	if $PAND_ENABLE && [ -x "$PAND_EXEC" -a -n "$PAND_OPTIONS" ] ; then
+		$PAND_EXEC $PAND_OPTIONS
+		echo -n " $PAND_NAME"
+	fi
+	echo "."
+	;;
+  stop)
+	echo -n "Stopping $DESC:"
+	[ -x "$PAND_EXEC" ] && $PAND_EXEC --killall
+	killall $PAND_NAME > /dev/null 2>&1 || true
+	echo -n " $PAND_NAME"
+	killall $DUND_NAME > /dev/null 2>&1 || true
+	echo -n " $DUND_NAME"
+	killall $RFCOMM_GETTY_NAME $RFCOMM_LISTEN_NAME $RFCOMM_NAME > /dev/null 2>&1 || true
+	echo -n " $RFCOMM_NAME"
+	killall $HCID_NAME > /dev/null 2>&1 || true
+	echo -n " $HCID_NAME"
+	killall $HCIATTACH_NAME > /dev/null 2>&1 || true
+	echo -n " $HCIATTACH_TTY"
+	echo "."
+	;;
+  *)
+	N=/etc/init.d/$NAME
+	echo "Usage: $N {start|stop}" >&2
+	exit 1
+	;;
+esac
+
+exit 0
