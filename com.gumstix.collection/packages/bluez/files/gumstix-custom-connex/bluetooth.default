@@ -1,13 +1,5 @@
 # Bluetooth configuraton file
 
-# Bind to a serial port by default?
-HCIATTACH_ENABLE=true
-HCIATTACH_TTY=ttyS1
-HCIATTACH_TYPE=gumstix
-HCIATTACH_START_SPEED=57600
-HCIATTACH_SPEED=921600
-HCIATTACH_HANDSHAKE=flow
-
 # Start of hcid (allowed values are "true" and "false")
 HCID_ENABLE=true
 
@@ -18,13 +10,13 @@ HCID_CONFIG="/etc/bluetooth/hcid.conf"
 SDPD_ENABLE=true
 
 # Start hidd (allowed values are "true" and "false")
-HIDD_ENABLE=false
+HIDD_ENABLE=true
 
 # Arguments to hidd
 HIDD_OPTIONS=""
 
 # Run hid2hci (allowed values are "true" and "false")
-HID2HCI_ENABLE=false
+HID2HCI_ENABLE=true
 
 # Bind rfcomm devices (allowed values are "true" and "false")
 RFCOMM_ENABLE=true
@@ -39,7 +31,7 @@ DUND_ENABLE=false
 DUND_OPTIONS="--listen --persist"
 
 # Start pand (allowed values are "true" and "false")
-PAND_ENABLE=true
+PAND_ENABLE=false
 
 # Arguments to pand
-PAND_OPTIONS="--role PANU --search --persist"
+PAND_OPTIONS="--listen --role NAP"
