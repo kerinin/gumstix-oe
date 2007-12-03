@@ -353,13 +353,4 @@
 +	int baudrates[] = { u->init_speed, 921600, 115200, 57600 };
  	int old_alarm = alarm(20); // Extend timeout
  	int i, j, retval;
- 
-@@ -921,7 +1199,7 @@
- struct uart_t uart[] = {
- 	{ "any",        0x0000, 0x0000, HCI_UART_H4,   115200, 115200, FLOW_CTL, NULL, NULL     },
- 	{ "ericsson",   0x0000, 0x0000, HCI_UART_H4,   57600,  115200, FLOW_CTL, NULL, ericsson },
--	{ "gumstix",	0x0000,	0x0000,	HCI_UART_H4,   57600,  921600, FLOW_CTL, gumstix },
-+	{ "gumstix",	0x0000,	0x0000,	HCI_UART_H4,   115200, 921600, FLOW_CTL, gumstix },
- 	{ "digi",       0x0000, 0x0000, HCI_UART_H4,   9600,   115200, FLOW_CTL, NULL, digi     },
- 	{ "texas",      0x0000, 0x0000, HCI_UART_H4,   115200, 115200, FLOW_CTL, NULL, texas    },
- 
+
