@@ -13,6 +13,7 @@ SRC_URI = "http://bluez.sourceforge.net/download/bluez-utils-${PV}.tar.gz \
            file://bluetooth.default \
            file://bluetooth.init \
            file://rfcomm.conf \
+           file://rfcomm-getty \
            file://bluez-utils-hciattach-gumstix.patch;patch=1 \
            file://bluez-utils-hciattach-pba31308.patch;patch=1 \
           "
@@ -85,6 +86,9 @@ do_install_append() {
 	install -m 0644 ${WORKDIR}/bluetooth.default ${D}${sysconfdir}/default/bluetooth
 	install -m 0755 ${WORKDIR}/bluetooth.init    ${D}${sysconfdir}/init.d/bluetooth
 
+  install -d 0777 ${D}${sysconfdir}/bluetooth/rfcomm
+	install -m 0755 ${WORKDIR}/rfcomm-getty     ${D}${sysconfdir}/bluetooth/rfcomm
+
   install -m 0755 ${S}/daemon/.libs/passkey-agent ${D}${base_bindir}/
 }
 
@@ -130,6 +134,7 @@ FILES_${PN}-compat = " \
 		    ${base_sbindir}/hid2hci \
 		    ${base_bindir}/passkey-agent \
 		    ${sysconfdir}/bluetooth/rfcomm.conf \
+        ${sysconfdir}/bluetooth/rfcomm/* \
 		   " 
 
 

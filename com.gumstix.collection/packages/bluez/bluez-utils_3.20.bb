@@ -24,6 +24,6 @@ CONFFILES_${PN} = " \
                   "
 
 CONFFILES_${PN}-compat = " \
-                          ${sysconfdir}/bluetooth/rfcomm.conf \
-                         "
+                    ${sysconfdir}/bluetooth/rfcomm.conf \
+                   "
 

@@ -11,14 +11,22 @@ DESC="Bluetooth subsystem"
 
 DAEMON_NAME=hcid
 HID2HCI_NAME=hid2hci
+RFCOMM_NAME=rfcomm
+RFCOMM_GETTY_NAME=rfcomm-getty
 
 DAEMON_EXEC="`which $DAEMON_NAME || true`"
 HID2HCI_EXEC="`which $HID2HCI_NAME || true`"
+RFCOMM_EXEC="`which $RFCOMM_NAME || true`"
 
 DAEMON_ENABLE=true
 HID2HCI_ENABLE=false
+RFCOMM_ENABLE=true
 
 DAEMON_CONFIG="/etc/bluetooth/hcid.conf"
+RFCOMM_CONFIG="/etc/bluetooth/rfcomm.conf"
+
+RFCOMM_LISTEN=/etc/bluetooth/rfcomm/rfcomm-listen
+RFCOMM_GETTY=/etc/bluetooth/rfcomm/rfcomm-getty
 
 [ -e /etc/default/bluetooth ] && . /etc/default/bluetooth
 
@@ -45,6 +53,12 @@ case "$1" in
 	if $HID2HCI_ENABLE && [ -x "$HID2HCI_EXEC" ] ; then
 		$HID2HCI_EXEC --tohci > /dev/null 2>&1 || true
 		echo -n " $HID2HCI_NAME"
+	fi
+	if $RFCOMM_ENABLE && [ -x "$RFCOMM_EXEC" -a -f "$RFCOMM_CONFIG" ] ; then
+		sdptool add --channel=1 SP > /dev/null 2>&1
+		$RFCOMM_EXEC -r -f $RFCOMM_CONFIG watch all > /dev/null 2>&1 &
+		$RFCOMM_GETTY > /dev/null 2>&1 &
+		echo -n " $RFCOMM_NAME"
 	fi
 	echo "."
 	;;
