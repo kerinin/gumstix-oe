@@ -22,6 +22,7 @@ PACKAGES = " \
     ${@base_contains('MACHINE_FEATURES', 'sound',       'task-base-gumstix-sound', '',d)} \
     ${@base_contains('MACHINE_FEATURES', 'touchscreen', 'task-base-gumstix-touchscreen', '',d)} \
     ${@base_contains('MACHINE_FEATURES', 'screen',		  'task-base-gumstix-screen', '',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'keyboard',	  'task-base-gumstix-keyboard', '',d)} \
     "
 
 RDEPENDS_task-base-gumstix = " \
@@ -41,6 +42,7 @@ RDEPENDS_task-base-gumstix = " \
     ${@base_contains('MACHINE_FEATURES', 'sound',       'task-base-gumstix-sound', '',d)} \
     ${@base_contains('MACHINE_FEATURES', 'touchscreen',	'task-base-gumstix-touchscreen', '',d)} \
     ${@base_contains('MACHINE_FEATURES', 'screen',		  'task-base-gumstix-screen', '',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'keyboard',	  'task-base-gumstix-keyboard', '',d)} \
     "
 
 PACKAGE_ARCH_task-boot-gumstix = "${MACHINE_ARCH}"
@@ -154,6 +156,8 @@ RRECOMMENDS_task-base-gumstix-bluetooth = "\
     kernel-module-bnep \
     kernel-module-hidp \
     kernel-module-sco \
+    kernel-module-hci-vhci \
+    kernel-module-hci-uart \
     ${@base_contains('MACHINE_FEATURES', 'usbhost', 'kernel-module-hci-usb', '',d)} \
     "
 
@@ -177,6 +181,9 @@ RRECOMMENDS_task-base-gumstix-usbhost = "\
     kernel-module-scsi-mod \
     kernel-module-usbserial \
     kernel-module-usb-storage \
+    kernel-module-usbhid \
+    kernel-module-usbmouse \
+    kernel-module-mousedev \
     "
 
 RDEPENDS_task-base-gumstix-wifi = "\
@@ -197,6 +204,7 @@ RRECOMMENDS_task-base-gumstix-wifi = "\
     kernel-module-michael-mic \
     kernel-module-aes \
     ${@base_contains('MACHINE_FEATURES', 'usbhost', 'kernel-module-zd1201', '',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'usbhost', 'kernel-module-zd1211rw', '',d)} \
     "
 
 RDEPENDS_task-base-gumstix-ethernet = "\
@@ -254,6 +262,9 @@ RRECOMMENDS_task-base-gumstix-screen = "\
     kernel-module-pxafb \
     "
 
+RDEPENDS_task-base-gumstix-keyboard = "\
+    keymaps
+    "
 
 
 

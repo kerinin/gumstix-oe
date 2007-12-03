@@ -9,11 +9,13 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 NAME=bluetooth
 DESC="Bluetooth subsystem"
 
+HCIATTACH_NAME=hciattach
 DAEMON_NAME=hcid
 HID2HCI_NAME=hid2hci
 RFCOMM_NAME=rfcomm
 RFCOMM_GETTY_NAME=rfcomm-getty
 
+HCIATTACH_EXEC="`which $HCIATTACH_NAME || true`"
 DAEMON_EXEC="`which $DAEMON_NAME || true`"
 HID2HCI_EXEC="`which $HID2HCI_NAME || true`"
 RFCOMM_EXEC="`which $RFCOMM_NAME || true`"
@@ -27,6 +29,13 @@ RFCOMM_CONFIG="/etc/bluetooth/rfcomm.conf"
 
 RFCOMM_LISTEN=/etc/bluetooth/rfcomm/rfcomm-listen
 RFCOMM_GETTY=/etc/bluetooth/rfcomm/rfcomm-getty
+
+HCIATTACH_ENABLE=true
+HCIATTACH_TTY=ttyS1
+HCIATTACH_TYPE=gumstix
+HCIATTACH_START_SPEED=57600
+HCIATTACH_SPEED=921600
+HCIATTACH_HANDSHAKE=flow
 
 [ -e /etc/default/bluetooth ] && . /etc/default/bluetooth
 
@@ -46,6 +55,10 @@ case "$1" in
 	echo AF1 out > /proc/gpio/GPIO12
 
 	echo -n "Starting $DESC:"
+	if $HCIATTACH_ENABLE && [ -x "$HCIATTACH_EXEC" ] ; then
+		$HCIATTACH_EXEC -s $HCIATTACH_START_SPEED $HCIATTACH_TTY $HCIATTACH_TYPE $HCIATTACH_SPEED $HCIATTACH_HANDSHAKE
+		echo -n " $HCIATTACH_TTY"
+	fi
 	if $DAEMON_ENABLE && [ -x "$DAEMON_EXEC" ] && [ -f "$DAEMON_CONFIG" ] ; then
 		$DAEMON_EXEC -s -f $DAEMON_CONFIG
 		echo -n " $DAEMON_NAME"
@@ -66,6 +79,8 @@ case "$1" in
 	echo -n "Stopping $DESC:"
 	killall $DAEMON_NAME > /dev/null 2>&1 || true
 	echo -n " $DAEMON_NAME"
+	killall $RFCOMM_NAME > /dev/null 2>&1 || true
+	echo -n " $RFCOMM_NAME"
 	echo "."
 	;;
   *)
