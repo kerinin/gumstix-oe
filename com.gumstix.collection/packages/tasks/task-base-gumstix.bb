@@ -263,7 +263,7 @@ RRECOMMENDS_task-base-gumstix-screen = "\
     "
 
 RDEPENDS_task-base-gumstix-keyboard = "\
-    keymaps
+    keymaps \
     "
 
 
