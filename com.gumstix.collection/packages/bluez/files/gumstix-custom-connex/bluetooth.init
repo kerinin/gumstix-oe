@@ -27,7 +27,6 @@ RFCOMM_ENABLE=true
 DAEMON_CONFIG="/etc/bluetooth/hcid.conf"
 RFCOMM_CONFIG="/etc/bluetooth/rfcomm.conf"
 
-RFCOMM_LISTEN=/etc/bluetooth/rfcomm/rfcomm-listen
 RFCOMM_GETTY=/etc/bluetooth/rfcomm/rfcomm-getty
 
 HCIATTACH_ENABLE=true
@@ -81,10 +80,14 @@ case "$1" in
 	;;
   stop)
 	echo -n "Stopping $DESC:"
-	killall $DAEMON_NAME > /dev/null 2>&1 || true
-	echo -n " $DAEMON_NAME"
 	killall $RFCOMM_NAME > /dev/null 2>&1 || true
 	echo -n " $RFCOMM_NAME"
+	killall $HID2HCI_NAME > /dev/null 2>&1 || true
+	echo -n " $HID2HCI_NAME"
+	killall $DAEMON_NAME > /dev/null 2>&1 || true
+	echo -n " $DAEMON_NAME"
+	killall $HCIATTACH_NAME > /dev/null 2>&1 || true
+	echo -n " $HCIATTACH_NAME"
 	echo "."
 	;;
   *)
