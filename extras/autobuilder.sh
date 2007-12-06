@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd $GUMSTIXTOP
+# edit line below for your setup
+cd $HOME/gumstix/gumstix-oe
+
 . extras/profile
 
 svn update
