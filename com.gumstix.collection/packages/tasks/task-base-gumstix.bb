@@ -106,6 +106,7 @@ RDEPENDS_task-base-gumstix-i2c = "\
 
 RRECOMMENDS_task-base-gumstix-i2c = "\
     kernel-module-i2c-core \
+    kernel-module-i2c-dev \
     kernel-module-i2c-pxa \
     "
 
