@@ -11,6 +11,8 @@ export USERBRANCH="${GUMSTIXTOP}/user.collection"
 export PATH="${GUMSTIXTOP}/bitbake/bin:$PATH"
 export BBPATH="${GUMSTIXTOP}/build:${USERBRANCH}:${GUMSTIXBRANCH}:${OEBRANCH}"
 
+umask 0002
+
 #
 # end gumstix oe
 #

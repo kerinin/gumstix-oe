@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd $GUMSTIXTOP
+. extras/profile
 
 svn update
 
