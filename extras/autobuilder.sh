@@ -11,20 +11,25 @@ cd $GUMSTIXTOP
 . extras/profile
 
 svn update
+
 export REVISION=`svnversion`
 
-rm -rf tmp
+if [ ! -e $OE_FEED/$REVISION ];
+then
+  echo "Building revision $REVISION"
 
-for i in gumstix-custom-connex gumstix-custom-verdex
-        do
-          echo "MACHINE = \"$i\"" > build/conf/auto.conf
-          bitbake gumstix-basic-image
-          bitbake gumstix-directfb-image
-        done
+  rm -rf tmp
 
-mkdir -p $OE_FEED/$REVISION
-cp -r tmp/deploy/ $OE_FEED/$REVISION
+  for i in gumstix-custom-connex gumstix-custom-verdex
+    do
+      echo "MACHINE = \"$i\"" > build/conf/auto.conf
+      bitbake gumstix-basic-image
+      bitbake gumstix-directfb-image
+    done
 
-svn revert build/conf/auto.conf
+  mkdir -p $OE_FEED/$REVISION
+  cp -rf tmp/deploy/* $OE_FEED/$REVISION
 
+  svn revert build/conf/auto.conf
+fi
 
