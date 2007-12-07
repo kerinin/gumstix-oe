@@ -1,21 +1,8 @@
 # basic gumstix image
 
-inherit image
+require gumstix-basic-image.bb
 
-BASE_URI = "http://www.sakoman.net/feeds/gumstix-uclibc"
-
-FEED_URIS = " \
-		no-arch##${BASE_URI}/all \
-		base##${BASE_URI}/${FEED_ARCH} \
-		${MACHINE}##${BASE_URI}/${MACHINE} \
-    "
-
-IMAGE_INSTALL = " \
-    task-base-gumstix \
-    cron \
-    ntp \
-    ntpdate \
-    boa \
+IMAGE_INSTALL += " \
     directfb \
     directfb-examples \
     "
