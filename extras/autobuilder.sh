@@ -1,11 +1,17 @@
 #!/bin/bash
 
 # edit line below for your setup
-cd $HOME/gumstix/gumstix-oe
+export GUMSTIXTOP="/home/oe/gumstix/gumstix-oe"
+
+# path to feed archives directory
+export OE_FEED="/var/www/feeds/archives"
+
+cd $GUMSTIXTOP
 
 . extras/profile
 
 svn update
+export REVISION=`svnversion`
 
 rm -rf tmp
 
@@ -15,5 +21,10 @@ for i in gumstix-custom-connex gumstix-custom-verdex
           bitbake gumstix-basic-image
           bitbake gumstix-directfb-image
         done
+
+mkdir -p $OE_FEED/$REVISION
+cp -r tmp/deploy/ $OE_FEED/$REVISION
+
+svn revert build/conf/auto.conf
 
 

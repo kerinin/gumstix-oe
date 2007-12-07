@@ -1,2 +1,2 @@
-0 2,10,18 * * * /home/oe/gumstix/gumstix-oe/extras/autobuilder.sh > /var/log/oe_build.log
+40 5,11,17,23 * * * /home/oe/gumstix/gumstix-oe/extras/autobuilder.sh > /home/oe/oe_build.log
 
