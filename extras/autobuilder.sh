@@ -15,7 +15,7 @@ BUILD_MACHINES=" \
 # list of build targets
 BUILD_TARGETS=" \
                gumstix-minimal-image \
-               gumsix-basic-image \
+               gumstix-basic-image \
                gumstix-directfb-image \
               "
 
@@ -40,7 +40,7 @@ then
 
     for target in $BUILD_TARGETS
     do
-      bitbake $target
+      bitbake $target && echo "$(date -u +%s) $target $BUILD_MODE $machine"
     done
 
   done
