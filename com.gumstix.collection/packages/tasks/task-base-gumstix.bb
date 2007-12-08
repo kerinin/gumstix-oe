@@ -102,6 +102,7 @@ RRECOMMENDS_task-boot-gumstix = "\
     "
 
 RDEPENDS_task-base-gumstix-i2c = "\
+    i2c \
     "
 
 RRECOMMENDS_task-base-gumstix-i2c = "\
