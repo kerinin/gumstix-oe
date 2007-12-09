@@ -1,6 +1,7 @@
 #!/bin/bash
 
-. extras/profile
+# edit if necessary to reflect your setup
+. $HOME/gumstix/gumstix-oe/extras/profile
 
 # path to feed directory
 OE_FEED="/var/www/feeds"
@@ -16,11 +17,10 @@ BUILD_TARGETS=" \
                gumstix-minimal-image \
                gumstix-basic-image \
                gumstix-directfb-image \
+               gumstix-perl-image \
               "
-
+              
 cd $GUMSTIXTOP
-echo "$GUMSTIXTOP is gumstix-oe root dir"
-
 svn update
 
 REVISION=`svnversion`
