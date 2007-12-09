@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# edit line below for your setup
-GUMSTIXTOP="/home/oe/gumstix/gumstix-oe"
+. extras/profile
 
 # path to feed directory
 OE_FEED="/var/www/feeds"
@@ -20,8 +19,7 @@ BUILD_TARGETS=" \
               "
 
 cd $GUMSTIXTOP
-
-. extras/profile
+echo "$GUMSTIXTOP is gumstix-oe root dir"
 
 svn update
 
@@ -48,6 +46,11 @@ then
   mkdir -p $OE_FEED/archive/$REVISION
   cp -rf tmp/deploy/* $OE_FEED/archive/$REVISION
   
+  cd $OE_FEED
+  rm -f current
+  ln -s $OE_FEED/archive/$REVISION current
+  
+  cd $GUMSTIXTOP
   svn revert build/conf/auto.conf
 fi
 

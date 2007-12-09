@@ -2,7 +2,7 @@
 
 inherit image
 
-BASE_URI = "http://www.sakoman.net/feeds/gumstix-uclibc"
+BASE_URI = "http://www.sakoman.net/feeds/current/uclibc/ipkg"
 
 FEED_URIS = " \
 		no-arch##${BASE_URI}/all \
