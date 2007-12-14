@@ -1,2 +1,2 @@
-00 2,10,18 * * * /home/oe/gumstix/gumstix-oe/extras/autobuilder.sh
+00 2,10,18 * * * /home/oe/gumstix/gumstix-oe/extras/autobuilder/autobuilder.sh
 
