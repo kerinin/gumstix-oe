@@ -83,7 +83,7 @@ RDEPENDS_task-boot-gumstix = "\
     util-linux-mount util-linux-umount \
     pxaregs \
     avahi-daemon \
-    avahi-autopid \
+    avahi-autoipd \
     ${DEBUG_APPS} \
     ${DISTRO_DEV_MANAGER} \
     ${DISTRO_INIT_MANAGER} \
