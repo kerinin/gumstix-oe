@@ -79,7 +79,7 @@ RDEPENDS_task-boot-gumstix = "\
     update-modules \
     sysfsutils \
     angstrom-version \
-    ipkg ipkg-collateral \
+    ipkg ipkg-link ipkg-collateral \
     util-linux-mount util-linux-umount \
     pxaregs \
     avahi-daemon \
