@@ -32,7 +32,7 @@ RFCOMM_GETTY=/etc/bluetooth/rfcomm/rfcomm-getty
 HCIATTACH_ENABLE=true
 HCIATTACH_TTY=ttyS1
 HCIATTACH_TYPE=gumstix
-HCIATTACH_START_SPEED=57600
+HCIATTACH_START_SPEED=921600
 HCIATTACH_SPEED=921600
 HCIATTACH_HANDSHAKE=flow
 
@@ -51,11 +51,13 @@ case "$1" in
 
 	/sbin/modprobe gumstix_bluetooth
 	/sbin/modprobe proc_gpio
+
+  echo "AF1 out" > /proc/gpio/GPIO9
                                                                       
-  echo "AF1 in" >/proc/gpio/GPIO42                              
-  echo "AF2 out" >/proc/gpio/GPIO43                             
-  echo "AF1 in" >/proc/gpio/GPIO44                              
-  echo "AF2 out" >/proc/gpio/GPIO45  
+  echo "AF1 in"  > /proc/gpio/GPIO42                              
+  echo "AF2 out" > /proc/gpio/GPIO43                             
+  echo "AF1 in"  > /proc/gpio/GPIO44                              
+  echo "AF2 out" > /proc/gpio/GPIO45  
 
 	echo -n "Starting $DESC:"
 	if $HCIATTACH_ENABLE && [ -x "$HCIATTACH_EXEC" ] ; then
