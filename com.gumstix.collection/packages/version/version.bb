@@ -1,14 +1,18 @@
-PV = "1.0"
+DESCRIPTION = "build information"
+SECTION = "base"
+PRIORITY = "required"
 PR = "r1"
-PE = "1"
+LICENSE = "GPL"
+
+do_install() {
+	install -d ${D}${sysconfdir}
+	echo "Revision `svnversion ${GUMSTIXTOP}`" >  ${D}${sysconfdir}/gumstix-version
+  echo "Built on `date`"                     >> ${D}${sysconfdir}/gumstix-version
+  echo "Build machine: `hostname`"           >> ${D}${sysconfdir}/gumstix-version
+  echo "Target machine: ${MACHINE}"          >> ${D}${sysconfdir}/gumstix-version
+  echo "libc: ${ANGSTROM_MODE}"              >> ${D}${sysconfdir}/gumstix-version
+}
 
 PACKAGES = "${PN}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-do_install() {
-	mkdir -p ${D}${sysconfdir}
-	echo "Angstrom ${DISTRO_VERSION}"          > ${D}${sysconfdir}/gumstix-version
-	echo "Revision `svnversion ${GUMSTIXTOP}`" >> ${D}${sysconfdir}/gumstix-version
-  echo `date`                                >> ${D}${sysconfdir}/gumstix-version
-  echo "Buid machine: `hostname`"            >> ${D}${sysconfdir}/gumstix-version
-}

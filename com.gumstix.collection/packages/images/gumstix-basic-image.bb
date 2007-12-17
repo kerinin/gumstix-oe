@@ -7,6 +7,7 @@ IMAGE_INSTALL += " \
     ntp \
     ntpdate \
     boa \
+    motd \
     www-content \
     "
 
