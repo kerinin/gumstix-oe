@@ -78,7 +78,7 @@ RDEPENDS_task-boot-gumstix = "\
     update-alternatives \
     update-modules \
     sysfsutils \
-    angstrom-version \
+    version \
     ipkg ipkg-link ipkg-collateral \
     util-linux-mount util-linux-umount \
     pxaregs \
