@@ -50,8 +50,8 @@ then
   rm -f current
   ln -s $OE_FEED/archive/$REVISION current
   
-# use for syning to remote server
-#  ftpsyncup
+# use for syncing to remote server
+  ftpsyncup
   
   cd $GUMSTIXTOP
   svn revert build/conf/auto.conf
