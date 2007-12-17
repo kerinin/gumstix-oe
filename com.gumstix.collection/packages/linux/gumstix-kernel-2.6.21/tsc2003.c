@@ -24,6 +24,7 @@
 #include <linux/input.h>
 #include <linux/delay.h>
 #include <asm-arm/arch-pxa/irqs.h>
+#define CONFIG_I2C_DEBUG_CHIP 1
 
 static unsigned short normal_i2c[]
 = {0x48, 0x49, 0x4a, 0x4b, I2C_CLIENT_END };
@@ -98,6 +99,12 @@ static inline int tsc2003_command (struct tsc2003_data *data,
   char c;
   int ret;
   down(&data->sem);
+
+#if defined(CONFIG_I2C_DEBUG_CHIP)
+  printk(KERN_ERR "%s: cmd=%x] pd=%x m=%x\n",
+         __FUNCTION__, cmd, pd, data->m);
+#endif
+
   c = TSC2003_CMD(cmd, pd, data->m);
   ret = i2c_master_send(&data->client, &c, 1);
   up(&data->sem);
@@ -112,6 +119,11 @@ static int tsc2003_read (struct tsc2003_data *data,
   char c;
   char d[2];
   int ret;
+
+#if defined(CONFIG_I2C_DEBUG_CHIP)
+  printk(KERN_ERR "%s: cmd=%x] pd=%x m=%x\n",
+         __FUNCTION__, cmd, pd, data->m);
+#endif
 
   c = TSC2003_CMD(cmd, pd, data->m);
   ret = i2c_master_send(&data->client, &c, 1);
@@ -129,9 +141,8 @@ static int tsc2003_read (struct tsc2003_data *data,
         *val += (d[1] >> 4);
     }
 
-#define CONFIG_I2C_DEBUG_CHIP 1
 #if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: val[%x] = %d\n",
+  printk(KERN_ERR "%s: val[%x] = %x\n",
          __FUNCTION__, cmd, (((int)d[0]) << 8) + d[1]);
 #endif
 
