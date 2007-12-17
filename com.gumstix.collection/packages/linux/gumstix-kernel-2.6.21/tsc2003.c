@@ -129,6 +129,7 @@ static int tsc2003_read (struct tsc2003_data *data,
         *val += (d[1] >> 4);
     }
 
+#define CONFIG_I2C_DEBUG_CHIP 1
 #if defined(CONFIG_I2C_DEBUG_CHIP)
   printk(KERN_ERR "%s: val[%x] = %d\n",
          __FUNCTION__, cmd, (((int)d[0]) << 8) + d[1]);
