@@ -59,7 +59,7 @@ case "$1" in
   echo "AF1 in"  > /proc/gpio/GPIO44                              
   echo "AF2 out" > /proc/gpio/GPIO45  
 
-	echo -n "Starting $DESC:"
+	echo "Starting $DESC:"
 	if $HCIATTACH_ENABLE && [ -x "$HCIATTACH_EXEC" ] ; then
 		$HCIATTACH_EXEC -s $HCIATTACH_START_SPEED $HCIATTACH_TTY $HCIATTACH_TYPE $HCIATTACH_SPEED $HCIATTACH_HANDSHAKE
 		echo -n " $HCIATTACH_TTY"
