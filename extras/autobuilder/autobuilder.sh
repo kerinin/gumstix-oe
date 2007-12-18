@@ -33,14 +33,15 @@ then
 
   for machine in $BUILD_MACHINES
   do
-
     echo "MACHINE = \"$machine\"" > build/conf/auto.conf
 
     for target in $BUILD_TARGETS
     do
-      bitbake $target && echo "$(date -u +%s) $target $BUILD_MODE $machine"
+      bitbake $target && echo "Completed $target for $machine"
     done
-
+# hack to prevent link error on bluez-utils on subsequent machines
+    bitbake -c clean gettext
+    bitbake -c clean glib-2.0
   done
 
   mkdir -p $OE_FEED/archive/$REVISION
