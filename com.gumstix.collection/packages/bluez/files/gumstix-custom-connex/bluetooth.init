@@ -14,15 +14,24 @@ DAEMON_NAME=hcid
 HID2HCI_NAME=hid2hci
 RFCOMM_NAME=rfcomm
 RFCOMM_GETTY_NAME=rfcomm-getty
+PAND_NAME=pand
+DUND_NAME=dund
 
 HCIATTACH_EXEC="`which $HCIATTACH_NAME || true`"
 DAEMON_EXEC="`which $DAEMON_NAME || true`"
 HID2HCI_EXEC="`which $HID2HCI_NAME || true`"
 RFCOMM_EXEC="`which $RFCOMM_NAME || true`"
+PAND_EXEC="`which $PAND_NAME || true`"
+DUND_EXEC="`which $DUND_NAME || true`"
 
 DAEMON_ENABLE=true
 HID2HCI_ENABLE=false
 RFCOMM_ENABLE=true
+DUND_ENABLE=false
+PAND_ENABLE=false
+
+DUND_OPTIONS=""
+PAND_OPTIONS=""
 
 DAEMON_CONFIG="/etc/bluetooth/hcid.conf"
 RFCOMM_CONFIG="/etc/bluetooth/rfcomm.conf"
@@ -51,8 +60,8 @@ case "$1" in
 
 	/sbin/modprobe gumstix_bluetooth
 	/sbin/modprobe proc_gpio
-  
-  echo "AF1 out" > /proc/gpio/GPIO12
+
+  echo "AF3 out" > /proc/gpio/GPIO9
                                                                       
   echo "AF1 in"  > /proc/gpio/GPIO42                              
   echo "AF2 out" > /proc/gpio/GPIO43                             
@@ -77,10 +86,22 @@ case "$1" in
     $RFCOMM_EXEC -r watch 0 1 /sbin/getty -w -L rfcomm0 115200 vt100 &
 		echo -n " $RFCOMM_NAME"
 	fi
+	if $DUND_ENABLE && [ -x "$DUND_EXEC" -a -n "$DUND_OPTIONS" ] ; then
+		$DUND_EXEC $DUND_OPTIONS
+		echo -n " $DUND_NAME"
+	fi
+	if $PAND_ENABLE && [ -x "$PAND_EXEC" -a -n "$PAND_OPTIONS" ] ; then
+		$PAND_EXEC $PAND_OPTIONS
+		echo -n " $PAND_NAME"
+	fi
 	echo "."
 	;;
   stop)
 	echo -n "Stopping $DESC:"
+	killall $PAND_NAME > /dev/null 2>&1 || true
+	echo -n " $PAND_NAME"
+	killall $DUND_NAME > /dev/null 2>&1 || true
+	echo -n " $DUND_NAME"
 	killall $RFCOMM_NAME > /dev/null 2>&1 || true
 	echo -n " $RFCOMM_NAME"
 	killall $HID2HCI_NAME > /dev/null 2>&1 || true
