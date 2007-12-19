@@ -18,6 +18,8 @@ BUILD_TARGETS=" \
                gumstix-basic-image \
                gumstix-directfb-image \
                gumstix-perl-image \
+               gpsd \
+               madplay \
               "
               
 cd $GUMSTIXTOP
