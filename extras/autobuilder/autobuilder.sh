@@ -42,7 +42,10 @@ then
 # hack to prevent link error on bluez-utils on subsequent machines
     bitbake -c clean gettext
     bitbake -c clean glib-2.0
+    bitbake -c clean libiconv
   done
+
+  svn revert build/conf/auto.conf
 
   mkdir -p $OE_FEED/archive/$REVISION
   cp -rf tmp/deploy/* $OE_FEED/archive/$REVISION
@@ -53,8 +56,6 @@ then
   
 # use for syncing to remote server
   ftpsyncup
-  
-  cd $GUMSTIXTOP
-  svn revert build/conf/auto.conf
+
 fi
 
