@@ -34,4 +34,8 @@ DUND_OPTIONS="--listen --persist"
 PAND_ENABLE=false
 
 # Arguments to pand
-PAND_OPTIONS="--listen --role NAP"
+# Uncomment the line below to set up your gumstix as a bluetooth network access point
+#PAND_OPTIONS="--listen --role NAP"
+# Uncomment the line below to connect to any available bluetooth network access point
+#PAND_OPTIONS="--role PANU --search --service NAP -sdp --persist"
+
