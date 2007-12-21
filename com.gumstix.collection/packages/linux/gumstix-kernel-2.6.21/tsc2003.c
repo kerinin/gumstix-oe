@@ -231,7 +231,7 @@ static irqreturn_t tsc2003_penirq (int irq, void *v)
   return IRQ_HANDLED;
 }
 
-/*
+
 static int tsc2003_remove (struct device *dev)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct tsc2003_data, driver);
@@ -239,7 +239,7 @@ static int tsc2003_remove (struct device *dev)
   input_unregister_device(d->idev);
   return 0;
 }
-*/
+
 
 static void tsc2003_pen_up (unsigned long v)
 {
@@ -486,7 +486,7 @@ static int tsc2003_detect_irq (struct tsc2003_data *d)
 	return 0;
 }
 
-/*
+
 static int tsc2003_probe (struct device *dev)
 {
   //struct platform_device *p = to_platform_device(dev);  
@@ -532,7 +532,7 @@ static int tsc2003_probe (struct device *dev)
 
   return ret;
 }
-*/
+
 
 static int tsc2003_driver_register (struct tsc2003_data *data)
 {
