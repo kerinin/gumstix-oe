@@ -18,6 +18,9 @@ BUILD_TARGETS=" \
                gumstix-basic-image \
                gumstix-directfb-image \
                gumstix-perl-image \
+               dhcp \
+               bridge-utils \
+               iptables \
                gpsd \
                madplay \
               "
