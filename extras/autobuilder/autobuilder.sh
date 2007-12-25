@@ -6,7 +6,13 @@
 # path to feed directory
 OE_FEED="/var/www/feeds"
 
-# list of machines to build for
+# list of libc variants to build
+BUILD_LIBC=" \
+                uclibc \
+#                glibc \
+               "
+
+# list of machines to build
 BUILD_MACHINES=" \
                 gumstix-custom-verdex \
                 gumstix-custom-connex \
@@ -14,16 +20,17 @@ BUILD_MACHINES=" \
 
 # list of build targets
 BUILD_TARGETS=" \
-               gumstix-minimal-image \
-               gumstix-basic-image \
-               gumstix-directfb-image \
-               gumstix-perl-image \
-               dhcp \
-               bridge-utils \
-               iptables \
-               gpsd \
-               madplay \
-              "
+                gumstix-minimal-image \
+                gumstix-basic-image \
+                gumstix-directfb-image \
+                gumstix-perl-image \
+                gumstix-x11-image \
+                dhcp \
+                bridge-utils \
+                iptables \
+                gpsd \
+                madplay \
+               "
               
 cd $GUMSTIXTOP
 svn update
@@ -36,21 +43,29 @@ then
 
   rm -rf tmp
 
-  for machine in $BUILD_MACHINES
-  do
-    echo "MACHINE = \"$machine\"" > build/conf/auto.conf
-
-    for target in $BUILD_TARGETS
+  for libc in $BUILD_LIBC
+  do    
+    echo "ANGSTROM_MODE = \"$libc\"" >> build/conf/local.conf
+    for machine in $BUILD_MACHINES
     do
-      bitbake $target && echo "Completed $target for $machine"
+      echo "MACHINE = \"$machine\"" > build/conf/auto.conf
+
+      for target in $BUILD_TARGETS
+      do
+        echo "Building $libc $target for $machine"
+        bitbake $target
+        echo "Completed $libc $target for $machine"
+      done
+
+  # hack to prevent link error on bluez-utils on subsequent machines
+      bitbake -c clean gettext
+      bitbake -c clean glib-2.0
+      bitbake -c clean libiconv
     done
-# hack to prevent link error on bluez-utils on subsequent machines
-    bitbake -c clean gettext
-    bitbake -c clean glib-2.0
-    bitbake -c clean libiconv
   done
 
-  svn revert build/conf/auto.conf
+ svn revert build/conf/auto.conf
+ svn revert build/conf/local.conf
 
   mkdir -p $OE_FEED/archive/$REVISION
   cp -rf tmp/deploy/* $OE_FEED/archive/$REVISION
