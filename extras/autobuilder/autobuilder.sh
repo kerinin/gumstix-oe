@@ -9,7 +9,7 @@ OE_FEED="/var/www/feeds"
 # list of libc variants to build
 BUILD_LIBC=" \
                 uclibc \
-#                glibc \
+                glibc \
                "
 
 # list of machines to build
@@ -25,6 +25,7 @@ BUILD_TARGETS=" \
                 gumstix-directfb-image \
                 gumstix-perl-image \
                 gumstix-x11-image \
+                qtopia-core \
                 dhcp \
                 bridge-utils \
                 iptables \
