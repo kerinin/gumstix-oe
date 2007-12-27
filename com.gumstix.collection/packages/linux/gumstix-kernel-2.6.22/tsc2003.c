@@ -24,11 +24,9 @@
 #include <linux/input.h>
 #include <linux/delay.h>
 #include <asm-arm/arch-pxa/irqs.h>
-#define CONFIG_I2C_DEBUG_CHIP 1
 
 static unsigned short normal_i2c[]
-= {0x48, 0x49, 0x4a, 0x4b, I2C_CLIENT_END };
-
+= {0x48, I2C_CLIENT_END };
 
 I2C_CLIENT_INSMOD_1(tsc2003);
 
@@ -99,12 +97,6 @@ static inline int tsc2003_command (struct tsc2003_data *data,
   char c;
   int ret;
   down(&data->sem);
-
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: cmd=%x] pd=%x m=%x\n",
-         __FUNCTION__, cmd, pd, data->m);
-#endif
-
   c = TSC2003_CMD(cmd, pd, data->m);
   ret = i2c_master_send(&data->client, &c, 1);
   up(&data->sem);
@@ -119,11 +111,6 @@ static int tsc2003_read (struct tsc2003_data *data,
   char c;
   char d[2];
   int ret;
-
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: cmd=%x] pd=%x m=%x\n",
-         __FUNCTION__, cmd, pd, data->m);
-#endif
 
   c = TSC2003_CMD(cmd, pd, data->m);
   ret = i2c_master_send(&data->client, &c, 1);
@@ -142,7 +129,7 @@ static int tsc2003_read (struct tsc2003_data *data,
     }
 
 #if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: val[%x] = %x\n",
+  printk(KERN_ERR "%s: val[%x] = %d\n",
          __FUNCTION__, cmd, (((int)d[0]) << 8) + d[1]);
 #endif
 
@@ -231,7 +218,7 @@ static irqreturn_t tsc2003_penirq (int irq, void *v)
   return IRQ_HANDLED;
 }
 
-
+/*
 static int tsc2003_remove (struct device *dev)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct tsc2003_data, driver);
@@ -239,7 +226,7 @@ static int tsc2003_remove (struct device *dev)
   input_unregister_device(d->idev);
   return 0;
 }
-
+*/
 
 static void tsc2003_pen_up (unsigned long v)
 {
@@ -486,7 +473,7 @@ static int tsc2003_detect_irq (struct tsc2003_data *d)
 	return 0;
 }
 
-
+/*
 static int tsc2003_probe (struct device *dev)
 {
   //struct platform_device *p = to_platform_device(dev);  
@@ -532,7 +519,7 @@ static int tsc2003_probe (struct device *dev)
 
   return ret;
 }
-
+*/
 
 static int tsc2003_driver_register (struct tsc2003_data *data)
 {

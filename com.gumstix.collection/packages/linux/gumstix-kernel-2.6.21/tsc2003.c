@@ -25,11 +25,8 @@
 #include <linux/delay.h>
 #include <asm-arm/arch-pxa/irqs.h>
 
-#define CONFIG_I2C_DEBUG_CHIP 1
- 
 static unsigned short normal_i2c[]
-= {0x48, 0x49, 0x4a, 0x4b, I2C_CLIENT_END };
-
+= {0x48, I2C_CLIENT_END };
 
 I2C_CLIENT_INSMOD_1(tsc2003);
 
@@ -100,12 +97,6 @@ static inline int tsc2003_command (struct tsc2003_data *data,
   char c;
   int ret;
   down(&data->sem);
-
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: cmd=[%x] pd=%x m=%x\n",
-         __FUNCTION__, cmd, pd, data->m);
-#endif
-
   c = TSC2003_CMD(cmd, pd, data->m);
   ret = i2c_master_send(&data->client, &c, 1);
   up(&data->sem);
@@ -121,23 +112,12 @@ static int tsc2003_read (struct tsc2003_data *data,
   char d[2];
   int ret;
 
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: cmd=[%x] pd=%x m=%x\n",
-         __FUNCTION__, cmd, pd, data->m);
-#endif
-
   c = TSC2003_CMD(cmd, pd, data->m);
   ret = i2c_master_send(&data->client, &c, 1);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: i2c_master_send completion\n");
-#endif
   if (ret <= 0) goto err;
 
   udelay(20);
   ret = i2c_master_recv(&data->client, d, data->m == M_12BIT ? 2 : 1);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: i2c_master_recv completion\n");
-#endif
   if (ret <= 0) goto err;
 
   if (val)
@@ -149,7 +129,7 @@ static int tsc2003_read (struct tsc2003_data *data,
     }
 
 #if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s: val[%x] = %x\n",
+  printk(KERN_ERR "%s: val[%x] = %d\n",
          __FUNCTION__, cmd, (((int)d[0]) << 8) + d[1]);
 #endif
 
@@ -162,81 +142,54 @@ static int tsc2003_read (struct tsc2003_data *data,
 static inline int tsc2003_read_temp0 (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *t)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_TEMP0, pd, t);
 }
 
 static inline int tsc2003_read_temp1 (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *t)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_TEMP1, pd, t);
 }
 
 static inline int tsc2003_read_xpos (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *x)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_XPOS, pd, x);
 }
 
 static inline int tsc2003_read_ypos (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *y)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_YPOS, pd, y);
 }
 
 static inline int tsc2003_read_pressure (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *p)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_Z1POS, pd, p);
 }
 
 static inline int tsc2003_read_in1 (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *t)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_IN1, pd, t);
 }
 
 static inline int tsc2003_read_in2 (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *t)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_IN2, pd, t);
 }
 
 static inline int tsc2003_read_vbat1 (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *t)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_VBAT1, pd, t);
 }
 
 static inline int tsc2003_read_vbat2 (struct tsc2003_data *d, enum 
 tsc2003_pd pd, int *t)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_VBAT2, pd, t);
 }
 
@@ -244,9 +197,6 @@ static inline int tsc2003_powerdown (struct tsc2003_data *d)
 {
   /* we don't have a distinct powerdown command,
      so do a benign read with the PD bits cleared */
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return tsc2003_read(d, MEAS_IN1, PD_POWERDOWN, 0);
 }
 
@@ -254,9 +204,6 @@ void tsc2003_init_client (struct i2c_client *client)
 {
   struct tsc2003_data *data = i2c_get_clientdata(client);
 
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   data->pd = PD_PENIRQ_DISARM;
   data->m = M_8BIT;
   return;
@@ -267,9 +214,6 @@ void tsc2003_init_client (struct i2c_client *client)
 static irqreturn_t tsc2003_penirq (int irq, void *v)
 {
   struct tsc2003_data *d = v;
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   complete(&d->penirq_completion);
   return IRQ_HANDLED;
 }
@@ -278,9 +222,6 @@ static irqreturn_t tsc2003_penirq (int irq, void *v)
 static int tsc2003_remove (struct device *dev)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct tsc2003_data, driver);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   free_irq(d->penirq,d);
   input_unregister_device(d->idev);
   return 0;
@@ -290,9 +231,6 @@ static int tsc2003_remove (struct device *dev)
 static void tsc2003_pen_up (unsigned long v)
 {
   struct tsc2003_data *d = (struct tsc2003_data *)v;
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   input_report_abs(d->idev, ABS_PRESSURE, 0);
   input_sync(d->idev);
   return;
@@ -300,9 +238,6 @@ static void tsc2003_pen_up (unsigned long v)
 
 static inline void tsc2003_restart_pen_up_timer (struct tsc2003_data *d)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   mod_timer(&d->penirq_timer, jiffies + (PENUP_TIMEOUT * HZ) / 1000);
 }
 
@@ -312,9 +247,6 @@ static int tsc2003ts_thread (void *v)
   struct task_struct *tsk = current;
   int ret;
   
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   d->tstask = tsk;
 
   daemonize(DRIVER_NAME "tsd");
@@ -405,9 +337,6 @@ static int tsc2003_idev_open (struct input_dev *idev)
   struct tsc2003_data *d = idev->private;
   int ret = 0;
 
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   if (down_interruptible(&d->sem))
     return -EINTR;
 
@@ -433,9 +362,6 @@ static int tsc2003_idev_open (struct input_dev *idev)
 static void tsc2003_idev_close (struct input_dev *idev)
 {
   struct tsc2003_data *d = idev->private;
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   down_interruptible(&d->sem);
   if (d->tstask)
     {
@@ -454,9 +380,6 @@ static ssize_t show_addr (struct device *dev, char *buf)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct 
 tsc2003_data, driver);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return sprintf(buf, "%d\n", d->client.addr);
 }
 static DEVICE_ATTR(addr, S_IRUGO, show_addr, NULL);
@@ -465,9 +388,6 @@ static ssize_t show_vbat1 (struct device *dev, char *buf)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct 
 tsc2003_data, driver);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return sprintf(buf, "%d\n", d->vbat1);
 }
 static DEVICE_ATTR(vbat1, S_IRUGO, show_vbat1, NULL);
@@ -476,9 +396,6 @@ static ssize_t show_vbat2 (struct device *dev, char *buf)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct 
 tsc2003_data, driver);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return sprintf(buf, "%d\n", d->vbat2);
 }
 static DEVICE_ATTR(vbat2, S_IRUGO, show_vbat2, NULL);
@@ -487,9 +404,6 @@ static ssize_t show_in1 (struct device *dev, char *buf)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct 
 tsc2003_data, driver);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return sprintf(buf, "%d\n", d->in1);
 }
 static DEVICE_ATTR(in1, S_IRUGO, show_in1, NULL);
@@ -498,9 +412,6 @@ static ssize_t show_in2 (struct device *dev, char *buf)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct 
 tsc2003_data, driver);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return sprintf(buf, "%d\n", d->in2);
 }
 static DEVICE_ATTR(in2, S_IRUGO, show_in2, NULL);
@@ -509,9 +420,6 @@ static ssize_t show_temp0 (struct device *dev, char *buf)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct 
 tsc2003_data, driver);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return sprintf(buf, "%d\n", d->temp0);
 }
 static DEVICE_ATTR(temp0, S_IRUGO, show_temp0, NULL);
@@ -520,9 +428,6 @@ static ssize_t show_temp1 (struct device *dev, char *buf)
 {
   struct tsc2003_data *d = container_of(dev->driver, struct 
 tsc2003_data, driver);
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return sprintf(buf, "%d\n", d->temp1);
 }
 static DEVICE_ATTR(temp1, S_IRUGO, show_temp1, NULL);
@@ -534,9 +439,6 @@ static int tsc2003s_thread (void *v)
 {
   struct tsc2003_data *d = v;
 
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   daemonize(DRIVER_NAME "sd");
   allow_signal(SIGKILL);
 
@@ -567,9 +469,6 @@ static int tsc2003s_thread (void *v)
 
 static int tsc2003_detect_irq (struct tsc2003_data *d)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
 	d->penirq = IRQ_GPIO(16);	//PWM0 GPIO
 	return 0;
 }
@@ -582,9 +481,6 @@ static int tsc2003_probe (struct device *dev)
   int ret = 0;  
   int error;
  
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   printk(KERN_ERR "TSC2003: tsc2003_probe probing...\n"); 
 
   error = tsc2003_detect_irq(d);
@@ -631,9 +527,6 @@ static int tsc2003_driver_register (struct tsc2003_data *data)
   int ret = 0;
   int error;  
 
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   init_MUTEX(&data->sem);
 
   init_timer(&data->penirq_timer);
@@ -687,9 +580,6 @@ static int tsc2003_driver_register (struct tsc2003_data *data)
 
 static int tsc2003_i2c_attach_adapter(struct i2c_adapter *adapter)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   printk(KERN_INFO "tsc2003 i2c touch screen controller\n");
   printk(KERN_INFO "Bill Gatliff <bgat at billgatliff.com\n");
   printk(KERN_INFO "Nicholas Chen <nchen at cs.umd.edu>\n");
@@ -702,9 +592,6 @@ static int tsc2003_i2c_detach_client(struct i2c_client *client)
   int err;  
   struct tsc2003_data *d = i2c_get_clientdata(client);
 
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   free_irq(d->penirq,d);
   input_unregister_device(d->idev);
 
@@ -733,9 +620,6 @@ int kind)
   struct i2c_client *new_client;
   struct tsc2003_data *data;
 
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   int err = 0;
   const char *name = "";
 
@@ -791,25 +675,16 @@ int kind)
  exit_free:
   kfree(new_client);
  exit:
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s exit\n",__FUNCTION__);
-#endif
   return err;
 }
 
 static int __init tsc2003_init(void)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   return i2c_add_driver(&tsc2003_driver);
 }
 
 static void __exit tsc2003_exit(void)
 {
-#if defined(CONFIG_I2C_DEBUG_CHIP)
-  printk(KERN_ERR "%s\n",__FUNCTION__);
-#endif
   i2c_del_driver(&tsc2003_driver);
 }
 
