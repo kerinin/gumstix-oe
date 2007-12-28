@@ -116,7 +116,7 @@ case `module_id` in
         "Motorola Ezx Platform")
                 ARGS="$ARGS -dpi 170 -screen ${SCREEN_SIZE}" ;;
         "The Gumstix Platform")
-                ARGS="$ARGS -dpi 128 -screen $S -nonstd" ;; 
+                ARGS="$ARGS -dpi 128 -screen nonstd" ;; 
         *)
                 # It is a device we do not know about, in which case we force
                 # kdrive to use the current framebuffer geometry -- otherwise
