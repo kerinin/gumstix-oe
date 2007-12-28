@@ -1,11 +1,20 @@
 DESCRIPTION = "udev is a daemon which dynamically creates and removes device nodes from \
 /dev/, handles hotplug events and loads drivers at boot time."
-
+SECTION = "base"
+PRIORITY = "required"
 LICENSE = "GPL"
+PR = "r2"
 
-SRC_URI += " \
+RPROVIDES_${PN} = "hotplug"
+
+SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+	   file://noasmlinkage.patch;patch=1 \
+	   file://flags.patch;patch=1 \
+	   file://vol_id_ld.patch;patch=1 \
+	   file://udevtrigger_add_devname_filtering.patch;patch=1 \
      file://init \
      file://85-sdmod.rules \
+     file://86-touchscreen.rules \
     "
 
 inherit update-rc.d autotools pkgconfig
