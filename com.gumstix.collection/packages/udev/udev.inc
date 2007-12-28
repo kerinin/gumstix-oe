@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
 SECTION = "base"
 PRIORITY = "required"
 LICENSE = "GPL"
-PR = "r2"
+PR = "r3"
 
 RPROVIDES_${PN} = "hotplug"
 
