@@ -254,8 +254,10 @@ static int tsc2003ts_thread (void *v)
 
   complete(&d->tstask_completion);
 
+#if defined(CONFIG_I2C_DEBUG_CHIP)
   printk(KERN_INFO "%s: address 0x%x\n",
          __FUNCTION__, d->client.addr);
+#endif
 
   while (!signal_pending(tsk))
     {
