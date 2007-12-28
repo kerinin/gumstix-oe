@@ -44,7 +44,8 @@ do_install () {
 	oe_runmake 'DESTDIR=${D}' INSTALL=install install
 
 	install -d ${D}${sysconfdir}/udev/rules.d/
-	install -m 0644 ${WORKDIR}/85-sdmod.rules ${D}${sysconfdir}/udev/rules.d/
+	install -m 0644 ${WORKDIR}/85-sdmod.rules       ${D}${sysconfdir}/udev/rules.d/
+	install -m 0644 ${WORKDIR}/86-touchscreen.rules ${D}${sysconfdir}/udev/rules.d/
 
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/udev
