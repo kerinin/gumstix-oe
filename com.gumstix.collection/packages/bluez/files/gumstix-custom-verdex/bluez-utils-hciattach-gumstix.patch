@@ -1,14 +1,14 @@
 --- bluez-utils-2.24/tools/hciattach.c
 +++ bluez-utils-2.24/tools/hciattach.c
-@@ -40,6 +40,7 @@
- #include <sys/time.h>
+@@ -42,6 +42,7 @@
+ #include <sys/param.h>
  #include <sys/ioctl.h>
  #include <sys/socket.h>
 +#include <sys/select.h>
  
  #include <bluetooth/bluetooth.h>
  #include <bluetooth/hci.h>
-@@ -93,12 +94,6 @@
+@@ -114,22 +115,6 @@
  		return B576000;
  	case 921600:
  		return B921600;
@@ -18,10 +18,20 @@
 -		return B1152000;
 -	case 1500000:
 -		return B1500000;
+-	case 2000000:
+-		return B2000000;
+-	case 2500000:
+-		return B2500000;
+-	case 3000000:
+-		return B3000000;
+-	case 3500000:
+-		return B3500000;
+-	case 4000000:
+-		return B4000000;
  	default:
  		return B57600;
  	}
-@@ -206,6 +201,19 @@
+@@ -243,6 +228,19 @@
  }
  
  /* 
@@ -41,7 +51,7 @@
   * Digianswer specific initialization 
   */
  static int digi(int fd, struct uart_t *u, struct termios *ti)
-@@ -747,6 +755,114 @@
+@@ -791,6 +789,114 @@
  	return 0;
  }
  
@@ -156,7 +166,7 @@
  /*
   * ST Microelectronics specific initialization
   * Marcel Holtmann <marcel@holtmann.org>
-@@ -805,6 +921,7 @@
+@@ -1044,6 +1150,7 @@
  struct uart_t uart[] = {
  	{ "any",        0x0000, 0x0000, HCI_UART_H4,   115200, 115200, FLOW_CTL, NULL, NULL     },
  	{ "ericsson",   0x0000, 0x0000, HCI_UART_H4,   57600,  115200, FLOW_CTL, NULL, ericsson },

@@ -88,6 +88,7 @@ case "$1" in
 	fi
 	if $RFCOMM_ENABLE && [ -x "$RFCOMM_EXEC" -a -f "$RFCOMM_CONFIG" ] ; then
 		sdptool add --channel=1 SP > /dev/null 2>&1
+    sleep 1
     $RFCOMM_EXEC -r watch 0 1 /sbin/getty -w -L rfcomm0 115200 vt100 &
 		echo -n " $RFCOMM_NAME"
 	fi
