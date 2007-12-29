@@ -58,18 +58,29 @@ then
         echo "Completed $libc $target for $machine"
       done
 
-  # hack to prevent link error on bluez-utils on subsequent machines
+      # hack to prevent link error on bluez-utils on subsequent machines
       bitbake -c clean gettext
       bitbake -c clean glib-2.0
       bitbake -c clean libiconv
     done
+    svn revert build/conf/local.conf
   done
 
- svn revert build/conf/auto.conf
- svn revert build/conf/local.conf
+  svn revert build/conf/auto.conf
 
   mkdir -p $OE_FEED/archive/$REVISION
   cp -rf tmp/deploy/* $OE_FEED/archive/$REVISION
+
+  # Cleanout stuff not needed in feed
+  for libc in $BUILD_LIBC
+  do
+    rm     $OE_FEED/archive/$REVISION/$libc/ipk/Packages*
+    rm -rf $OE_FEED/archive/$REVISION/$libc/ipk/i686
+    for machine in $BUILD_MACHINES
+    do
+      rm     $OE_FEED/archive/$REVISION/$libc/images/$machine/modules*
+    done
+  done
   
   cd $OE_FEED
   rm -f current
