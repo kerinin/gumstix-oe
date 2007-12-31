@@ -1,7 +1,7 @@
 require gumstix-linux.inc
 
 SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
-       file://defconfig \
+       ${@base_contains('MACHINE_FEATURES', 'lcd','file://defconfig', 'file://defconfig-nofb',d)} \
        file://tsc2003.c \
        file://tsc2003-config.diff;patch=1 \
        file://pxa-regs-additions.patch;patch=1 \
@@ -49,5 +49,6 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
        "
 
 do_configure_prepend() {
-        cp ${WORKDIR}/tsc2003.c ${S}/drivers/i2c/chips/
+       ${@base_contains('MACHINE_FEATURES', 'lcd','','mv ${WORKDIR}/defconfig-nofb ${WORKDIR}/defconfig',d)}
+       cp ${WORKDIR}/tsc2003.c ${S}/drivers/i2c/chips/
 }
