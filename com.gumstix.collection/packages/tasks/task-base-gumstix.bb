@@ -23,6 +23,7 @@ PACKAGES = " \
     ${@base_contains('MACHINE_FEATURES', 'touchscreen', 'task-base-gumstix-touchscreen', '',d)} \
     ${@base_contains('MACHINE_FEATURES', 'lcd',         'task-base-gumstix-lcd', '',d)} \
     ${@base_contains('MACHINE_FEATURES', 'keyboard',	  'task-base-gumstix-keyboard', '',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'robostix',	  'task-base-gumstix-robostix', '',d)} \
     "
 
 RDEPENDS_task-base-gumstix = " \
@@ -43,6 +44,7 @@ RDEPENDS_task-base-gumstix = " \
     ${@base_contains('MACHINE_FEATURES', 'touchscreen',	'task-base-gumstix-touchscreen', '',d)} \
     ${@base_contains('MACHINE_FEATURES', 'lcd',         'task-base-gumstix-lcd', '',d)} \
     ${@base_contains('MACHINE_FEATURES', 'keyboard',	  'task-base-gumstix-keyboard', '',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'robostix',	  'task-base-gumstix-robostix', '',d)} \
     "
 
 PACKAGE_ARCH_task-boot-gumstix = "${MACHINE_ARCH}"
@@ -60,6 +62,8 @@ PACKAGE_ARCH_task-base-gumstix-ethernet = "${MACHINE_ARCH}"
 PACKAGE_ARCH_task-base-gumstix-sound = "${MACHINE_ARCH}"
 PACKAGE_ARCH_task-base-gumstix-touchscreen = "${MACHINE_ARCH}"
 PACKAGE_ARCH_task-base-gumstix-lcd = "${MACHINE_ARCH}"
+PACKAGE_ARCH_task-base-gumstix-keyboard = "${MACHINE_ARCH}"
+PACKAGE_ARCH_task-base-gumstix-robostix = "${MACHINE_ARCH}"
 
 DISTRO_DEV_MANAGER   ?= "udev"
 DISTRO_INIT_MANAGER  ?= "sysvinit sysvinit-pidof"
@@ -264,6 +268,11 @@ RRECOMMENDS_task-base-gumstix-touchscreen = "\
 RDEPENDS_task-base-gumstix-keyboard = "\
     keymaps \
     "
+
+RRECOMMENDS_task-base-gumstix-robostix = "\
+    robostix-module \
+    "
+
 
 
 
