@@ -3,11 +3,11 @@ DEPENDS = "robostix-module"
 SECTION = "libs"
 LICENSE = "GPL"
 
-PR="r1"
+PR="r2"
 
 SRC_URI = " \
            http://savannah.nongnu.org/download/uisp/uisp-${PV}.tar.gz \
-           file://uisp-robostix.patch \
+           file://uisp-robostix.patch;patch=1 \
           "
 
 S = "${WORKDIR}/uisp-${PV}"
