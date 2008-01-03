@@ -269,6 +269,12 @@ RDEPENDS_task-base-gumstix-keyboard = "\
     keymaps \
     "
 
+RDEPENDS_task-base-gumstix-robostix = "\
+    robostix-cmdline \
+    robostix-sertest \
+    uisp \
+    "
+
 RRECOMMENDS_task-base-gumstix-robostix = "\
     robostix-module \
     "
