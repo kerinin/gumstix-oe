@@ -22,6 +22,7 @@ BUILD_MACHINES=" \
 BUILD_TARGETS=" \
                 gumstix-minimal-image \
                 gumstix-basic-image \
+                gumstix-goliath-image \
                 gumstix-directfb-image \
                 gumstix-perl-image \
                 gumstix-x11-image \
