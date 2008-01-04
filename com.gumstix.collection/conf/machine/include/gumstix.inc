@@ -37,6 +37,7 @@ PREFERRED_VERSION_gnuplot = "4.0.0"
 PREFERRED_VERSION_dropbear = "0.47"
 PREFERRED_VERSION_wpa-supplicant = "0.5.8"
 PREFERRED_VERSION_bluez-utils = "3.24"
+PREFERRED_VERSION_bluez-utils-alsa = "3.24"
 PREFERRED_VERSION_bluez-libs = "3.24"
 PREFERRED_VERSION_bluez-hcidump = "1.40"
 
