@@ -1,0 +1,16 @@
+gumstix-minimal-image
+gumstix-basic-image
+gumstix-goliath-image
+gumstix-directfb-image
+gumstix-perl-image
+gumstix-x11-image
+bluez-hcidump
+bluez-utils-alsa
+bluez-gstreamer-plugin
+dhcp
+bridge-utils
+iptables
+gpsd
+madplay
+qtopia-core
+

@@ -18,21 +18,8 @@ BUILD_MACHINES=" \
                 gumstix-custom-connex \
                "
 
-# list of build targets
-BUILD_TARGETS=" \
-                gumstix-minimal-image \
-                gumstix-basic-image \
-                gumstix-goliath-image \
-                gumstix-directfb-image \
-                gumstix-perl-image \
-                gumstix-x11-image \
-                qtopia-core \
-                dhcp \
-                bridge-utils \
-                iptables \
-                gpsd \
-                madplay \
-               "
+# read list of build targets
+BUILD_TARGETS=`cat $HOME/gumstix/gumstix-oe/extras/autobuilder/targets`
               
 cd $GUMSTIXTOP
 svn update
