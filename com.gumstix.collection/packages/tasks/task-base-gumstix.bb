@@ -1,5 +1,6 @@
 DESCRIPTION = "Use machine options to create a basic gumstix machine task/package"
-PR = "r2"
+
+PR = "r3"
 
 inherit task
 
@@ -7,23 +8,23 @@ PROVIDES = "${PACKAGES}"
 PACKAGES = " \
     task-boot-gumstix \
     task-base-gumstix \
-    ${@base_contains('MACHINE_FEATURES', 'i2c',         'task-base-gumstix-i2c', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'spi',         'task-base-gumstix-spi', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'pcmcia',      'task-base-gumstix-pcmcia', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'mmc',         'task-base-gumstix-mmc', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'serial',      'task-base-gumstix-serial', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'bluetooth',   'task-base-gumstix-bluetooth', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'usbgadget',   'task-base-gumstix-usbgadget', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'usbhost',     'task-base-gumstix-usbhost', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'wifi',        'task-base-gumstix-wifi', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'ethernet',    'task-base-gumstix-ethernet', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'fat',         'task-base-gumstix-fat', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'ext2',        'task-base-gumstix-ext2', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'sound',       'task-base-gumstix-sound', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'touchscreen', 'task-base-gumstix-touchscreen', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'lcd',         'task-base-gumstix-lcd', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'keyboard',	  'task-base-gumstix-keyboard', '',d)} \
-    ${@base_contains('MACHINE_FEATURES', 'robostix',	  'task-base-gumstix-robostix', '',d)} \
+    i2c \
+    spi \
+    pcmcia \
+    mmc \
+    serial \
+    bluetooth \
+    usbgadget \
+    usbhost \
+    wifi \
+    ethernet \
+    fat \
+    ext2 \
+    sound \
+    touchscreen \
+    lcd \
+    keyboard \
+    robostix \
     "
 
 RDEPENDS_task-base-gumstix = " \
