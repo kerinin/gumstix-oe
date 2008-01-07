@@ -118,9 +118,14 @@ case "$1" in
 	echo -n " $HCIATTACH_NAME"
 	echo "."
 	;;
+  restart)
+       $0 stop
+       sleep 1
+       $0 start
+       ;;
   *)
 	N=/etc/init.d/$NAME
-	echo "Usage: $N {start|stop}" >&2
+	echo "Usage: $N {start|stop|restart}" >&2
 	exit 1
 	;;
 esac
