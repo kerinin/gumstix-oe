@@ -8,23 +8,23 @@ PROVIDES = "${PACKAGES}"
 PACKAGES = " \
     task-boot-gumstix \
     task-base-gumstix \
-    i2c \
-    spi \
-    pcmcia \
-    mmc \
-    serial \
-    bluetooth \
-    usbgadget \
-    usbhost \
-    wifi \
-    ethernet \
-    fat \
-    ext2 \
-    sound \
-    touchscreen \
-    lcd \
-    keyboard \
-    robostix \
+    task-base-gumstix-i2c \
+    task-base-gumstix-spi \
+    task-base-gumstix-pcmcia \
+    task-base-gumstix-mmc \
+    task-base-gumstix-serial \
+    task-base-gumstix-bluetooth \
+    task-base-gumstix-usbgadget \
+    task-base-gumstix-usbhost \
+    task-base-gumstix-wifi \
+    task-base-gumstix-ethernet \
+    task-base-gumstix-fat \
+    task-base-gumstix-ext2 \
+    task-base-gumstix-sound \
+    task-base-gumstix-touchscreen \
+    task-base-gumstix-lcd \
+    task-base-gumstix-keyboard \
+    task-base-gumstix-robostix \
     "
 
 RDEPENDS_task-base-gumstix = " \
