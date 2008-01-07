@@ -39,5 +39,6 @@ PREFERRED_VERSION_wpa-supplicant = "0.5.8"
 PREFERRED_VERSION_bluez-utils = "3.24"
 PREFERRED_VERSION_bluez-utils-alsa = "3.24"
 PREFERRED_VERSION_bluez-libs = "3.24"
+PREFERRED_VERSION_bluez-gstreamer-plugin = "3.24"
 PREFERRED_VERSION_bluez-hcidump = "1.40"
 

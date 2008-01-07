@@ -1,6 +1,6 @@
 require bluez-utils3.inc
 
-PR="r1"
+PR="r2"
 
 DEPENDS += "alsa-lib"
 
