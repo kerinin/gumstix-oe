@@ -22,21 +22,21 @@ S = "${WORKDIR}/bluez-utils-${PV}"
 inherit autotools update-rc.d
 
 EXTRA_OECONF = " \
-     --enable-bccmd \
-		 --enable-hid2hci \
-     --enable-alsa \ 
-		 --enable-cups \
-		 --enable-glib \
-		 --disable-sdpd \
-	   --enable-network \
-	   --enable-serial \
-	   --enable-input \
-	   --enable-audio \
-	   --enable-echo \
-     --enable-configfile \
-	   --enable-initscripts \
-		 --enable-test \
-		" 
+    --enable-bccmd \
+    --enable-hid2hci \
+    --enable-alsa \ 
+    --enable-cups \
+    --enable-glib \
+    --disable-sdpd \
+    --enable-network \
+    --enable-serial \
+    --enable-input \
+    --enable-audio \
+    --enable-echo \
+    --enable-configfile \
+    --enable-initscripts \
+    --enable-test \
+    " 
 
 # The config options are explained below:
 
@@ -72,6 +72,8 @@ EXTRA_OECONF = " \
 #disable it:
 #	--disable-hid2hci
 
+OE_LT_RPATH_ALLOW = "any"
+OE_LT_RPATH_ALLOW[export]="1"
 
 do_install_append() {
 	install -d ${D}${base_sbindir} ${D}${base_bindir}/  ${D}${sysconfdir}/apm/event.d/
@@ -97,41 +99,41 @@ PACKAGES =+ "${PN}-compat"
 
 
 FILES_${PN} = " \
-         ${base_sbindir}/hcid \
-         ${libdir}/bluetooth \
-         ${sysconfdir}/init.d/bluetooth \
-         ${sysconfdir}/bluetooth/*.service \
-         ${sysconfdir}/bluetooth/hcid.conf \
-         ${sysconfdir}/default \
-         ${sysconfdir}/dbus-1 \
-	       ${base_sbindir}/hciattach \
-              "
+    ${base_sbindir}/hcid \
+    ${libdir}/bluetooth \
+    ${sysconfdir}/init.d/bluetooth \
+    ${sysconfdir}/bluetooth/*.service \
+    ${sysconfdir}/bluetooth/hcid.conf \
+    ${sysconfdir}/default \
+    ${sysconfdir}/dbus-1 \
+    ${base_sbindir}/hciattach \
+    "
 
 FILES_${PN}-dbg += " \
-       ${libdir}/bluetooth/.debug \
-		   ${libdir}/cups/backend/.debug \
-		   ${libdir}/alsa-lib/.debug \
-		  " 
+    ${libdir}/bluetooth/.debug \
+    ${libdir}/cups/backend/.debug \
+    ${libdir}/alsa-lib/.debug \
+    " 
 
 FILES_${PN}-compat = " \
-        ${base_bindir}/sdptool \
-        ${base_bindir}/dund \
-		    ${base_bindir}/rctest \
-		    ${base_bindir}/ciptool \
-		    ${base_bindir}/l2test \
-		    ${base_bindir}/rfcomm \
-		    ${base_bindir}/hcitool \
-		    ${base_bindir}/pand \
-		    ${base_bindir}/hidd \
-		    ${base_bindir}/l2ping \
-		    ${base_sbindir}/hciconfig \
-        ${base_sbindir}/bccmd \
-		    ${base_sbindir}/hciemu \
-		    ${base_sbindir}/hid2hci \
-		    ${base_bindir}/passkey-agent \
-		    ${sysconfdir}/bluetooth/rfcomm.conf \
-        ${sysconfdir}/bluetooth/rfcomm/* \
-		   " 
+    ${base_bindir}/sdptool \
+    ${base_bindir}/dund \
+    ${base_bindir}/rctest \
+    ${base_bindir}/ciptool \
+    ${base_bindir}/l2test \
+    ${base_bindir}/rfcomm \
+    ${base_bindir}/hcitool \
+    ${base_bindir}/pand \
+    ${base_bindir}/hidd \
+    ${base_bindir}/l2ping \
+    ${base_sbindir}/hciconfig \
+    ${base_sbindir}/bccmd \
+    ${base_sbindir}/hciemu \
+    ${base_sbindir}/hid2hci \
+    ${base_bindir}/passkey-agent \
+    ${sysconfdir}/bluetooth/rfcomm.conf \
+    ${sysconfdir}/bluetooth/rfcomm/* \
+    " 
 
 
 
