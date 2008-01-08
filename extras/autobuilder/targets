@@ -7,10 +7,15 @@ gumstix-x11-image
 bluez-hcidump
 bluez-utils-alsa
 bluez-gstreamer-plugin
+gst-plugin-audioconvert
+gst-plugin-mad
+gst-plugins-base
+gst-plugins-ugly
+alsa-utils-aplay
+madplay
 dhcp
 bridge-utils
 iptables
 gpsd
-madplay
 qtopia-core
 
