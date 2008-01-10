@@ -1,6 +1,6 @@
 # fstab for gumstix-verdex
 
-rootfs               /                    auto       defaults              1  1
+rootfs               /                    auto       defaults,sync,noatime 1  1
 proc                 /proc                proc       defaults              0  0
 sysfs                /sys                 sysfs      defaults              0  0
 tmpfs                /dev                 tmpfs      defaults              0  0
