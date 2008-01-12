@@ -5,11 +5,10 @@ HOMEPAGE = "http://www.gumstix.com"
 LICENSE = "GPL"
 RDEPENDS = "kernel (${KERNEL_VERSION})"
 DEPENDS = "virtual/kernel"
-PR = "r0"
+PR = "r1"
 
 SRC_URI = "http://files.gumstix.com/cf8385-5.0.16.p0-26306.tbz \
 			file://wifistix.conf \
-			file://mcf25 \
 			file://marvell-devicename.patch;patch=1 \
 			file://marvell-devicetable.patch;patch=1 \
 			file://marvell-gumstix.patch;patch=1 \
@@ -43,8 +42,6 @@ do_install() {
 
 	install -m 0755 -d ${D}${sysconfdir}/modprobe.d
 	install -m 0644 ${WORKDIR}/wifistix.conf ${D}${sysconfdir}/modprobe.d/wifistix.conf
- 	install -m 0755 -d ${D}${sysconfdir}/modutils
- 	install -m 0644 ${WORKDIR}/mcf25 ${D}${sysconfdir}/modutils/mcf25
 }
 
 PACKAGES = "${PN}"
@@ -52,5 +49,4 @@ FILES_${PN} = "${base_libdir}/modules/"
 FILES_${PN} += "${sysconfdir}/modprobe.d/"
 FILES_${PN} += "${sysconfdir}/modutils/"
 CONFFILES_${PN} = "${sysconfdir}/modprobe.d/wifistix.conf"
-CONFFILES_${PN} += "${sysconfdir}/modutils/mcf25"
 
