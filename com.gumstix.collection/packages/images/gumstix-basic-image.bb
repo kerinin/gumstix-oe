@@ -9,6 +9,7 @@ IMAGE_INSTALL += " \
     boa \
     motd \
     www-content \
+    mtd-utils \
     "
 
 
