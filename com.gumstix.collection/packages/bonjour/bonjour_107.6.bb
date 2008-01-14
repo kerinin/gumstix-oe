@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 
 RDEPENDS_bonjour = "update-rc.d"
 
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://www.opensource.apple.com/darwinsource/tarballs/other/mDNSResponder-${PV}.tar.gz \
            file://bonjour.conf \
@@ -19,6 +19,7 @@ INITSCRIPT_NAME = "bonjour"
 INITSCRIPT_PARAMS = "defaults 50"
 
 EXTRA_OEMAKE = 'CC="${CC}" os=linux -C ${S}/mDNSPosix SAResponder'
+PARALLEL_MAKE = ""
 
 do_install() {
 
