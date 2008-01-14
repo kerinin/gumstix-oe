@@ -1,6 +1,6 @@
 DESCRIPTION = "Use machine options to create a basic gumstix machine task/package"
 
-PR = "r3"
+PR = "r4"
 
 inherit task
 
@@ -79,6 +79,7 @@ RDEPENDS_task-boot-gumstix = "\
     base-files \
     base-passwd \
     modutils-initscripts \
+    modutils-collateral \
     module-init-tools \
     update-alternatives \
     update-modules \
