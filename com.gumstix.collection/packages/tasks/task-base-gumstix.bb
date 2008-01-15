@@ -250,6 +250,7 @@ RDEPENDS_task-base-gumstix-sound = "\
 RRECOMMENDS_task-base-gumstix-sound = "\
     alsa-state \
     alsa-states \
+    kernel-module-snd-pxa2xx-ac97 \
     kernel-module-snd-soc-gumstix \
     kernel-module-snd-pcm-oss \
     kernel-module-snd-mixer-oss \
