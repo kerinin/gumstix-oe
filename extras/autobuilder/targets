@@ -16,6 +16,7 @@ madplay
 dhcp
 bridge-utils
 iptables
+net-tools
 gpsd
 qtopia-core
 
