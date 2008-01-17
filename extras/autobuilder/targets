@@ -12,6 +12,7 @@ gst-plugin-mad
 gst-plugins-base
 gst-plugins-ugly
 alsa-utils-aplay
+aumix
 madplay
 dhcp
 bridge-utils
