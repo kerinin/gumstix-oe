@@ -1,6 +1,6 @@
 DESCRIPTION = "Use machine options to create a basic gumstix machine task/package"
 
-PR = "r5"
+PR = "r6"
 
 inherit task
 
@@ -245,6 +245,7 @@ RRECOMMENDS_task-base-gumstix-ext2 = "\
 RDEPENDS_task-base-gumstix-sound = "\
     alsa-utils-alsactl \
     alsa-utils-alsamixer \
+    alsa-utils-speakertest \
     "
 
 RRECOMMENDS_task-base-gumstix-sound = "\
