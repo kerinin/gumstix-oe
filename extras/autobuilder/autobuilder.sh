@@ -18,14 +18,14 @@ BUILD_MACHINES=" \
                 gumstix-custom-connex \
                "
 
-# read list of build targets
-BUILD_TARGETS=`cat $HOME/gumstix/gumstix-oe/extras/autobuilder/targets`
-              
 cd $GUMSTIXTOP
 svn update
 
 REVISION=`svnversion`
 
+# read list of build targets
+BUILD_TARGETS=`cat $HOME/gumstix/gumstix-oe/extras/autobuilder/targets`
+              
 if [ ! -e $OE_FEED/archive/$REVISION ];
 then
   echo "Building revision $REVISION"
