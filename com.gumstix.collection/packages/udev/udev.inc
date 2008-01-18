@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
 SECTION = "base"
 PRIORITY = "required"
 LICENSE = "GPL"
-PR = "r4"
+PR = "r5"
 
 RPROVIDES_${PN} = "hotplug"
 
@@ -45,6 +45,7 @@ do_install () {
 	oe_runmake 'DESTDIR=${D}' INSTALL=install install
 
 	install -d ${D}${sysconfdir}/udev/rules.d/
+	install -m 0644 ${WORKDIR}/20-sound.rules       ${D}${sysconfdir}/udev/rules.d/
 	install -m 0644 ${WORKDIR}/85-sdmod.rules       ${D}${sysconfdir}/udev/rules.d/
 	install -m 0644 ${WORKDIR}/86-touchscreen.rules ${D}${sysconfdir}/udev/rules.d/
 
