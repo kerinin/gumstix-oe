@@ -8,7 +8,7 @@ DESCRIPTION = "Default ALSA configuration"
 LICENSE = "GPL"
 RRECOMMENDS_alsa-state = "alsa-states"
 PV = "0.1.0"
-PR = "r7"
+PR = "r5"
 
 SRC_URI = " \
   file://asoundrc \
@@ -29,7 +29,7 @@ SRC_URI_append_fic-gta01 = " \
 inherit update-rc.d
 
 INITSCRIPT_NAME = "alsa-state"
-INITSCRIPT_PARAMS = "defaults 10"
+INITSCRIPT_PARAMS = "defaults 25"
 
 do_install() {
     install -d ${D}${sysconfdir}/init.d
