@@ -1,4 +1,4 @@
-state.UCB1400 {
+state.Gumstix {
 	control.1 {
 		comment.access 'read write'
 		comment.type INTEGER
