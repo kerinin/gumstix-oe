@@ -787,7 +787,7 @@ CONFIG_NETDEVICES=y
 # CONFIG_DUMMY is not set
 # CONFIG_BONDING is not set
 # CONFIG_EQUALIZER is not set
-# CONFIG_TUN is not set
+CONFIG_TUN=m
 # CONFIG_PHYLIB is not set
 
 #
@@ -1011,8 +1011,20 @@ CONFIG_SENSORS_TSC2003_SYSFS=m
 #
 # SPI support
 #
-# CONFIG_SPI is not set
-# CONFIG_SPI_MASTER is not set
+CONFIG_SPI=y
+# CONFIG_SPI_DEBUG is not set
+CONFIG_SPI_MASTER=y
+
+#
+# SPI Master Controller Drivers
+#
+# CONFIG_SPI_BITBANG is not set
+CONFIG_SPI_PXA2XX=m
+
+#
+# SPI Protocol Masters
+#
+# CONFIG_SPI_AT25 is not set
 
 #
 # Dallas's 1-wire bus
