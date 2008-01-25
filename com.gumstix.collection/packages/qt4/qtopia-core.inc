@@ -20,9 +20,9 @@ QT_CONFIG_FLAGS += " \
     -nomake demos -nomake examples -nomake tools -qtlibinfix E\
     -embedded ${QT_ARCH} \
     -qt-decoration-styled -plugin-decoration-default -plugin-decoration-windows \
-    -plugin-gfx-transformed -plugin-gfx-qvfb -plugin-gfx-vnc\
-    -plugin-mouse-tslib -qt-mouse-pc -qt-mouse-qvfb\
-    -qt-kbd-tty -qt-kbd-usb -qt-kbd-qvfb\
+    -plugin-gfx-transformed -plugin-gfx-vnc\
+    -plugin-mouse-tslib -qt-mouse-pc \
+    -qt-kbd-tty -qt-kbd-usb \
     ${QT_QCONFIG} \
     "
 
