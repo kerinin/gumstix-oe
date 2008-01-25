@@ -31,7 +31,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= " \
 # The following *should* be in a distro.conf file
 # We include them here to avoid creating a new distro
 
-PREFERRED_VERSION_gumstix-kernel = "2.6.21"
+PREFERRED_VERSION_gumstix-kernel = "2.6.22"
 PREFERRED_VERSION_udev = "115"
 PREFERRED_VERSION_gnuplot = "4.0.0"
 PREFERRED_VERSION_dropbear = "0.47"
