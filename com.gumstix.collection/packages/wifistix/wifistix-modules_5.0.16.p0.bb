@@ -5,7 +5,7 @@ HOMEPAGE = "http://www.gumstix.com"
 LICENSE = "GPL"
 RDEPENDS = "kernel (${KERNEL_VERSION})"
 DEPENDS = "virtual/kernel"
-PR = "r1"
+PR = "r2"
 
 SRC_URI = "http://files.gumstix.com/cf8385-5.0.16.p0-26306.tbz \
 			file://wifistix.conf \
@@ -20,7 +20,9 @@ SRC_URI = "http://files.gumstix.com/cf8385-5.0.16.p0-26306.tbz \
 			file://no-more-config-h.patch;patch=1 \
 			file://realtime-kernel.patch;patch=1 \
 			file://install-properly.patch;patch=1 \
-			file://fix-essid-truncation.patch;patch=1"
+			file://nospi.patch;patch=1 \
+			file://fix-essid-truncation.patch;patch=1 \
+     "
 
 S = "${WORKDIR}/src_cf8385"
 
