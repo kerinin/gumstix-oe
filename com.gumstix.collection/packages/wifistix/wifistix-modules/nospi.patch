@@ -4,7 +4,7 @@
  	PLATFORM = pxa270
  	endif
  
-+  ifneq ($CONFIG_GUMSTIX),y)
++  ifneq ($(CONFIG_GUMSTIX),y)
  	CFLAGS += -DSPI
  	CFLAGS += -I../if/if_sdspi
  	CFLAGS += -I../io/sdspi/$(PLATFORM)
