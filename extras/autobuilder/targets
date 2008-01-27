@@ -5,7 +5,8 @@ gumstix-goliath-image
 gumstix-perl-image
 gumstix-qtopia-console-image
 gumstix-x11-image
-alsa-utils-aplay
+alsa-utils
+alsa-plugins
 aumix
 bluez-hcidump
 bluez-gstreamer-plugin
