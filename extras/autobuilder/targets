@@ -13,6 +13,8 @@ bluez-gstreamer-plugin
 bluez-utils-alsa
 bridge-utils
 dhcp
+gd
+gnuplot
 gpsd
 gstreamer
 gst-plugins-base
@@ -23,4 +25,5 @@ iptables
 madplay
 net-tools
 qtopia-core
+sqlite
 
