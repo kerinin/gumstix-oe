@@ -12,6 +12,7 @@ bluez-hcidump
 bluez-gstreamer-plugin
 bluez-utils-alsa
 bridge-utils
+curl
 dhcp
 gd
 gnuplot
