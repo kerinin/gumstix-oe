@@ -46,6 +46,8 @@ RFCOMM_GETTY=/etc/bluetooth/rfcomm/rfcomm-getty
 HCIATTACH_ENABLE=true
 HCIATTACH_TTY=ttyS1
 HCIATTACH_TYPE=gumstix
+# if you have an older gumstix motherboard with a ROK bluetooth module
+# the HCIATTACH_START_SPEED should be 57600
 HCIATTACH_START_SPEED=921600
 HCIATTACH_SPEED=921600
 HCIATTACH_HANDSHAKE=flow
@@ -66,6 +68,9 @@ case "$1" in
 	/sbin/modprobe gumstix_bluetooth
 	/sbin/modprobe proc_gpio
 
+# if you have an older gumstix motherboard with a ROK bluetooth module
+# uncomment the following line
+#  echo "GPIO out set" >/proc/gpio/GPIO7
   echo "AF3 out" > /proc/gpio/GPIO9
                                                                       
   echo "AF1 in"  > /proc/gpio/GPIO42                              
