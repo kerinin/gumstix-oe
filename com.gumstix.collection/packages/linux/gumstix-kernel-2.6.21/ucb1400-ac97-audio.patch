@@ -26,24 +26,24 @@ Index: linux-2.6.21gum/sound/pci/ac97/ac97_patch.c
  #include <sound/core.h>
  #include <sound/pcm.h>
  #include <sound/control.h>
-@@ -406,6 +410,227 @@ int patch_yamaha_ymf753(struct snd_ac97 
+@@ -406,6 +410,238 @@
  }
  
  /*
 + * UCB1400 codec
 + */
 +
-+#define AC97_UCB1400_FCSR1	0x6a
-+#define AC97_UCB1400_FCSR2	0x6c
++#define AC97_UCB1400_FCSR1     0x6a
++#define AC97_UCB1400_FCSR2     0x6c
 +
 +static const struct snd_kcontrol_new ucb1400_snd_ac97_controls[] = {
-+	AC97_SINGLE("Tone Control - Bass", AC97_UCB1400_FCSR1, 11, 4, 0),
-+	AC97_SINGLE("Tone Control - Treble", AC97_UCB1400_FCSR1, 9, 2, 0),
-+	AC97_SINGLE("Headphone Playback Switch", AC97_UCB1400_FCSR1, 6, 1, 0),
-+	AC97_SINGLE("De-emphasis", AC97_UCB1400_FCSR1, 5, 1, 0),
-+	AC97_SINGLE("DC Filter", AC97_UCB1400_FCSR1, 4, 1, 0),
-+	AC97_SINGLE("Hi-pass Filter", AC97_UCB1400_FCSR1, 3, 1, 0),
-+	AC97_SINGLE("ADC Filter", AC97_UCB1400_FCSR2, 12, 1, 0),
++       AC97_SINGLE("Tone Control - Bass", AC97_UCB1400_FCSR1, 11, 4, 0),
++       AC97_SINGLE("Tone Control - Treble", AC97_UCB1400_FCSR1, 9, 2, 0),
++       AC97_SINGLE("Headphone Playback Switch", AC97_UCB1400_FCSR1, 6, 1, 0),
++       AC97_SINGLE("De-emphasis", AC97_UCB1400_FCSR1, 5, 1, 0),
++       AC97_SINGLE("DC Filter", AC97_UCB1400_FCSR1, 4, 1, 0),
++       AC97_SINGLE("Hi-pass Filter", AC97_UCB1400_FCSR1, 3, 1, 0),
++       AC97_SINGLE("ADC Filter", AC97_UCB1400_FCSR2, 12, 1, 0),
 +};
 +
 +#define NUM_GPIO_LINES 10
@@ -53,23 +53,23 @@ Index: linux-2.6.21gum/sound/pci/ac97/ac97_patch.c
 +
 +typedef struct
 +{
-+	int			gpio;
-+	char			name[32];
-+	struct snd_ac97		*ac97;
++       int                     gpio;
++       char                    name[32];
++       struct snd_ac97         *ac97;
 +} gpio_summary_type;
 +
 +static gpio_summary_type gpio_summaries[NUM_GPIO_LINES] =
 +{
-+	{ 0,	"UCB1400-0-0" },
-+	{ 1, 	"UCB1400-0-1" },
-+	{ 2, 	"UCB1400-0-2" },
-+	{ 3, 	"UCB1400-0-3" },
-+	{ 4, 	"UCB1400-0-4" },
-+	{ 5, 	"UCB1400-0-5" },
-+	{ 6, 	"UCB1400-0-6" },
-+	{ 7, 	"UCB1400-0-7" },
-+	{ 8, 	"UCB1400-0-8" },
-+	{ 9, 	"UCB1400-0-9" }
++       { 0,    "UCB1400-0-0" },
++       { 1,    "UCB1400-0-1" },
++       { 2,    "UCB1400-0-2" },
++       { 3,    "UCB1400-0-3" },
++       { 4,    "UCB1400-0-4" },
++       { 5,    "UCB1400-0-5" },
++       { 6,    "UCB1400-0-6" },
++       { 7,    "UCB1400-0-7" },
++       { 8,    "UCB1400-0-8" },
++       { 9,    "UCB1400-0-9" }
 +};
 +
 +
@@ -141,7 +141,7 @@ Index: linux-2.6.21gum/sound/pci/ac97/ac97_patch.c
 +    value = snd_ac97_read(summary->ac97, 0x5a);
 +    if (direction_is_out)
 +    {
-+            dir |= 0x0001 << i;		
++            dir |= 0x0001 << i;
 +            if (operation_is_set)
 +            {
 +                    value |= 0x0001 << i;
@@ -204,57 +204,68 @@ Index: linux-2.6.21gum/sound/pci/ac97/ac97_patch.c
 +
 +int patch_ucb1400(struct snd_ac97 * ac97)
 +{
-+	int err, i;
++       int err, i;
 +
-+ 	proc_gpio_parent = proc_mkdir("gpio", NULL);
-+ 	if(!proc_gpio_parent) return 0;
++  proc_gpio_parent = NULL;
++  for (proc_gpio_parent = proc_root.subdir; proc_gpio_parent; proc_gpio_parent = proc_gpio_parent->next) {
++    if (( proc_gpio_parent->namelen == 4 ) && ( memcmp(proc_gpio_parent->name, "gpio", 4 ) == 0 ))
++      break;
++  }
++
++  // proc_gpio_parent will be non-NULL if the directory already exists
++
++  if (!proc_gpio_parent) {
++       proc_gpio_parent = proc_mkdir("gpio", NULL);
++  }
++
++       if(!proc_gpio_parent) return 0;
 + 
-+ 	for(i=0; i < NUM_GPIO_LINES; i++)
-+ 	{
-+ 		proc_gpios[i] = create_proc_entry(gpio_summaries[i].name, 0644, proc_gpio_parent);
-+ 		if(proc_gpios[i])
-+ 		{
-+			gpio_summaries[i].ac97 = ac97;
-+ 			proc_gpios[i]->data = &gpio_summaries[i];
-+ 			proc_gpios[i]->read_proc = proc_ucb1400_ac97_gpio_read;
-+ 			proc_gpios[i]->write_proc = proc_ucb1400_ac97_gpio_write;
-+ 		}
-+ 	}
++       for(i=0; i < NUM_GPIO_LINES; i++)
++       {
++               proc_gpios[i] = create_proc_entry(gpio_summaries[i].name, 0644, proc_gpio_parent);
++               if(proc_gpios[i])
++               {
++                       gpio_summaries[i].ac97 = ac97;
++                       proc_gpios[i]->data = &gpio_summaries[i];
++                       proc_gpios[i]->read_proc = proc_ucb1400_ac97_gpio_read;
++                       proc_gpios[i]->write_proc = proc_ucb1400_ac97_gpio_write;
++               }
++       }
 +
-+	for(i = 0; i < ARRAY_SIZE(ucb1400_snd_ac97_controls); i++) {
-+		if((err = snd_ctl_add(ac97->bus->card, snd_ac97_cnew(&ucb1400_snd_ac97_controls[i], ac97))) < 0)
-+			return err;
-+	}
++       for(i = 0; i < ARRAY_SIZE(ucb1400_snd_ac97_controls); i++) {
++               if((err = snd_ctl_add(ac97->bus->card, snd_ac97_cnew(&ucb1400_snd_ac97_controls[i], ac97))) < 0)
++                       return err;
++       }
 +
-+	snd_ac97_write_cache(ac97,  AC97_UCB1400_FCSR1,
-+			(0 << 11) |     // 0 base boost
-+			(0 << 9)  |     // 0 treble boost
-+			(0 << 7)  |     // Mode = flat
-+			(1 << 6)  |     // Headphones enable
-+			(0 << 5)  |     // De-emphasis disabled
-+			(1 << 4)  |     // DC filter enabled
-+			(1 << 3)  |     // Hi-pass filter enabled
-+			(0 << 2)  |     // disable interrupt signalling via GPIO_INT
-+			(1 << 0)        // clear ADC overflow status if set
-+		);
++       snd_ac97_write_cache(ac97,  AC97_UCB1400_FCSR1,
++                       (0 << 11) |     // 0 base boost
++                       (0 << 9)  |     // 0 treble boost
++                       (0 << 7)  |     // Mode = flat
++                       (1 << 6)  |     // Headphones enable
++                       (0 << 5)  |     // De-emphasis disabled
++                       (1 << 4)  |     // DC filter enabled
++                       (1 << 3)  |     // Hi-pass filter enabled
++                       (0 << 2)  |     // disable interrupt signalling via GPIO_INT
++                       (1 << 0)        // clear ADC overflow status if set
++               );
 +
-+	snd_ac97_write_cache(ac97, AC97_UCB1400_FCSR2,
-+			(0 << 15) |     // must be 0
-+			(0 << 13) |     // must be 0
-+			(1 << 12) |     // ADC filter enabled
-+			(0 << 10) |     // must be 0
-+			(0 << 4)  |     // Smart low power mode on neither Codec nor PLL
-+			(0 << 0)        // must be 0
-+		);
++       snd_ac97_write_cache(ac97, AC97_UCB1400_FCSR2,
++                       (0 << 15) |     // must be 0
++                       (0 << 13) |     // must be 0
++                       (1 << 12) |     // ADC filter enabled
++                       (0 << 10) |     // must be 0
++                       (0 << 4)  |     // Smart low power mode on neither Codec nor PLL
++                       (0 << 0)        // must be 0
++               );
 +
-+	return 0;
++       return 0;
 +}
 +
 +/*
   * May 2, 2003 Liam Girdwood <liam.girdwood@wolfsonmicro.com>
   *  removed broken wolfson00 patch.
   *  added support for WM9705,WM9708,WM9709,WM9710,WM9711,WM9712 and WM9717.
-@@ -3408,41 +3633,3 @@ int patch_lm4550(struct snd_ac97 *ac97)
+@@ -3408,41 +3644,3 @@
  	ac97->res_table = lm4550_restbl;
  	return 0;
  }

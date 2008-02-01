@@ -26,7 +26,7 @@ Index: linux-2.6.21gum/sound/pci/ac97/ac97_patch.c
  
  /*
   *  Chip specific initialization
-@@ -394,6 +394,227 @@ int patch_yamaha_ymf753(struct snd_ac97 
+@@ -394,6 +394,238 @@ int patch_yamaha_ymf753(struct snd_ac97 
  }
  
  /*
@@ -206,7 +206,18 @@ Index: linux-2.6.21gum/sound/pci/ac97/ac97_patch.c
 +{
 +	int err, i;
 +
-+ 	proc_gpio_parent = proc_mkdir("gpio", NULL);
++  proc_gpio_parent = NULL;
++  for (proc_gpio_parent = proc_root.subdir; proc_gpio_parent; proc_gpio_parent = proc_gpio_parent->next) {
++    if (( proc_gpio_parent->namelen == 4 ) && ( memcmp(proc_gpio_parent->name, "gpio", 4 ) == 0 ))
++      break;
++  }
++
++  // proc_gpio_parent will be non-NULL if the directory already exists
++
++  if (!proc_gpio_parent) {
++       proc_gpio_parent = proc_mkdir("gpio", NULL);
++  }
++
 + 	if(!proc_gpio_parent) return 0;
 + 
 + 	for(i=0; i < NUM_GPIO_LINES; i++)
