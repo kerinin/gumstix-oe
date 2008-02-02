@@ -294,7 +294,7 @@ Index: linux-2.6.21gum/drivers/gpio/proc_gpio.c
 +  // proc_gpio_parent will be non-NULL if the directory already exists
 +
 +  if (!proc_gpio_parent) {
-+       proc_gpio_parent = proc_mkdir("gpio", NULL);
++       proc_gpio_parent = create_proc_entry("gpio", S_IFDIR | S_IRUGO | S_IXUGO, NULL);
 +  }
 +
 + 	if(!proc_gpio_parent) return 0;
