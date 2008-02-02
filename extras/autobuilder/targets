@@ -25,6 +25,7 @@ gst-plugins-ugly
 iptables
 madplay
 net-tools
+php
 qtopia-core
 sqlite
 
