@@ -9,10 +9,17 @@ alsa-utils
 alsa-plugins
 aumix
 bash
+bash-completion
+bind
 bluez-hcidump
 bluez-gstreamer-plugin
 bluez-utils-alsa
+bootchart
 bridge-utils
+cherokee
+ckermit
+console-tools
+coreutils
 curl
 dhcp
 gd
@@ -27,6 +34,7 @@ iptables
 iputils
 ltrace
 madplay
+msmtp
 mysql
 net-tools
 php
