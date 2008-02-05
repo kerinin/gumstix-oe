@@ -37,6 +37,8 @@ madplay
 msmtp
 mysql
 net-tools
+openssh
+openssl
 php
 python
 qtopia-core
