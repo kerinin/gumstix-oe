@@ -22,8 +22,13 @@ console-tools
 coreutils
 curl
 dhcp
+esmtp
+fbgrab
+fget
 gd
+gdb
 gnuplot
+gnutls
 gpsd
 gstreamer
 gst-plugins-base
