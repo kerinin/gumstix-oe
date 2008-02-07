@@ -8,8 +8,8 @@ OE_FEED="/var/www/feeds"
 
 # list of libc variants to build
 BUILD_LIBC=" \
-                uclibc \
                 glibc \
+                uclibc \
                "
 
 # list of machines to build
