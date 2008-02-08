@@ -1165,7 +1165,7 @@ CONFIG_SND_PXA2XX_AC97=m
 #
 # USB devices
 #
-# CONFIG_SND_USB_AUDIO is not set
+CONFIG_SND_USB_AUDIO=m
 # CONFIG_SND_USB_CAIAQ is not set
 
 #
