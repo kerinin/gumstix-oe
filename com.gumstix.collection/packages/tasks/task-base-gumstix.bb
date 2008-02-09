@@ -193,6 +193,8 @@ RRECOMMENDS_task-base-gumstix-usbhost = "\
     kernel-module-usbhid \
     kernel-module-usbmouse \
     kernel-module-mousedev \
+    kernel-module-snd-usb-audio \
+    kernel-module-snd-usb-lib \
     "
 
 RDEPENDS_task-base-gumstix-wifi = "\
