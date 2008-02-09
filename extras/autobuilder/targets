@@ -45,6 +45,7 @@ iptables
 iputils
 ltrace
 madplay
+microwindows
 msmtp
 mysql
 navit
@@ -52,6 +53,7 @@ net-tools
 openssh
 openssl
 php
+pine
 python
 qtopia-core
 ruby
