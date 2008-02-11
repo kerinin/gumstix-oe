@@ -25,6 +25,7 @@ curl
 dhcp
 esmtp
 fbgrab
+fbset
 fget
 gcc
 gd
@@ -52,7 +53,9 @@ microwindows
 minicom
 msmtp
 mysql
+nano
 navit
+ncurses
 net-tools
 openssh
 openssl
@@ -61,6 +64,7 @@ pine
 python
 qtopia-core
 ruby
+screen
 sqlite
 strace
 wget
