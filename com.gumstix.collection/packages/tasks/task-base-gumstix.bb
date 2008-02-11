@@ -189,6 +189,7 @@ RRECOMMENDS_task-base-gumstix-usbhost = "\
     kernel-module-sd-mod \
     kernel-module-scsi-mod \
     kernel-module-usbserial \
+    kernel-module-ftdi-sio \
     kernel-module-usb-storage \
     kernel-module-usbhid \
     kernel-module-usbmouse \
