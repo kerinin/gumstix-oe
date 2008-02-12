@@ -5,6 +5,7 @@ gumstix-goliath-image
 gumstix-perl-image
 gumstix-qtopia-console-image
 gumstix-x11-image
+gumstix-midori-image
 acct
 alsa-utils
 alsa-plugins
@@ -26,6 +27,7 @@ dhcp
 esmtp
 fbgrab
 fbset
+fbset-modes
 fget
 gcc
 gd
