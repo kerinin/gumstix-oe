@@ -11,7 +11,7 @@ PARALLEL_MAKE = ""
 EXTRA_OEMAKE = " \
   -C ${S}/src \
   VERBOSE=Y \
-  CONFIG=${WORKDIR}/defconfig \
+  ARCH=LINUX-ARM \
   ARMTOOLSPREFIX=${TARGET_PREFIX}	\
   INCJPEG=${STAGING_INCDIR} \
   LIBJPEG=${STAGING_LIBDIR}/libjpeg.so \
@@ -21,9 +21,13 @@ EXTRA_OEMAKE = " \
   INSTALL_PREFIX=${D}${prefix} \
   INSTALL_OWNER1= \
   INSTALL_OWNER2= \
+  NANOX=Y \
+  NANOWM=Y \
+  NANOXDEMO=Y \
  "
 
 do_compile() {
+	cp ${WORKDIR}/defconfig ${S}/src/config
   oe_runmake
 }
 
