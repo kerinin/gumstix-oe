@@ -306,7 +306,7 @@ HWVGA                    = N
 # YOPYMOUSE	Yopy (/dev/yopy-ts)
 # HARRIERMOUSE	NEC Harrier (/dev/tpanel)
 ####################################################################
-GPMMOUSE                 = N
+GPMMOUSE                 = Y
 SERMOUSE                 = N
 SUNMOUSE                 = N
 NOMOUSE                  = N
@@ -317,19 +317,19 @@ ADSMOUSE                 = N
 ADS7846MOUSE             = N
 EPMOUSE                  = N
 VHMOUSE                  = N
-MTMOUSE                  = Y
+MTMOUSE                  = N
 PSIONMOUSE               = N
 YOPYMOUSE                = N
 HARRIERMOUSE             = N
 LIRCMOUSE                = N
 
 # keyboard or null kbd driver
-TTYKBD                   = N
+TTYKBD                   = Y
 SCANKBD                  = N
 PIPEKBD                  = N
 IPAQKBD                  = N
 LIRCKBD                  = N
-NOKBD                    = Y
+NOKBD                    = N
 
 endif
 
