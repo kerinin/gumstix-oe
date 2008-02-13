@@ -41,4 +41,6 @@ PREFERRED_VERSION_bluez-utils-alsa = "3.24"
 PREFERRED_VERSION_bluez-libs = "3.24"
 PREFERRED_VERSION_bluez-gstreamer-plugin = "3.24"
 PREFERRED_VERSION_bluez-hcidump = "1.40"
-
+PREFERRED_VERSION_microwindows = "0.91"
+PREFERRED_VERSION_midori = "0.0.15"
+SRCREV_pn-webkit-gtk = "28656"
