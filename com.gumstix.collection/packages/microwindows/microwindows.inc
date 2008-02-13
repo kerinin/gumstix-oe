@@ -10,8 +10,6 @@ PARALLEL_MAKE = ""
 
 EXTRA_OEMAKE = " \
   -C ${S}/src \
-  VERBOSE=Y \
-  ARCH=LINUX-ARM \
   ARMTOOLSPREFIX=${TARGET_PREFIX}	\
   INCJPEG=${STAGING_INCDIR} \
   LIBJPEG=${STAGING_LIBDIR}/libjpeg.so \
@@ -21,9 +19,6 @@ EXTRA_OEMAKE = " \
   INSTALL_PREFIX=${D}${prefix} \
   INSTALL_OWNER1= \
   INSTALL_OWNER2= \
-  NANOX=Y \
-  NANOWM=Y \
-  NANOXDEMO=Y \
  "
 
 do_compile() {
@@ -32,19 +27,25 @@ do_compile() {
 }
 
 do_stage() {
-	install -m 0644 src/include/nano-X.h ${STAGING_INCDIR}/
-	install -m 0644 src/include/mwtypes.h ${STAGING_INCDIR}/
-	install -m 0644 src/include/nxcolors.h ${STAGING_INCDIR}/
-	install -m 0644 src/include/nxdraw.h ${STAGING_INCDIR}/
-	install -m 0755 src/lib/*.so ${STAGING_LIBDIR}/
-	install -m 0644 src/lib/*.a ${STAGING_LIBDIR}/
+	install -m 0644 ${S}/src/include/nano-X.h ${STAGING_INCDIR}/
+	install -m 0644 ${S}/src/include/mwtypes.h ${STAGING_INCDIR}/
+	install -m 0644 ${S}/src/include/nxcolors.h ${STAGING_INCDIR}/
+	install -m 0644 ${S}/src/include/nxdraw.h ${STAGING_INCDIR}/
+#	install -m 0755 ${S}/src/lib/*.so ${STAGING_LIBDIR}/
+	install -m 0644 ${S}/src/lib/*.a ${STAGING_LIBDIR}/
 }
 
 do_install() {
-  oe_runmake  install
-	install -d ${D}${bindir} ${D}${libdir}
-	install -m 0755 src/lib/* ${D}${libdir}
-	install -m 0755 src/bin/* ${D}${bindir}/
+  oe_runmake install all
+
+# the next 3 lines are necessary for snapshot build since it has CVS cruft in the tarball
+  rm -rf ${S}/src/lib/CVS
+  rm -rf ${S}/src/bin/CVS
+  rm -f ${S}/src/bin/fonts
+
+	install -d ${D}${bindir} ${D}$bindir}/fonts ${D}${libdir} 
+	install -m 0755 ${S}/src/lib/*   ${D}${libdir}/
+	install -m 0755 ${S}/src/bin/*   ${D}${bindir}/
 }
 
 FILES_${PN}="${bindir}/* ${libdir}/*"
