@@ -4,14 +4,13 @@ PRIORITY = "optional"
 DEPENDS = "libpng jpeg zlib"
 LICENSE = "GPL"
 
-PR="r1"
+PR="r2"
 
 PARALLEL_MAKE = ""
 
 EXTRA_OEMAKE = " \
   -C ${S}/src \
   ARMTOOLSPREFIX=${TARGET_PREFIX}	\
-  MW_DIR_LIB=${S}/src/lib \
   INCJPEG=${STAGING_INCDIR} \
   LIBJPEG=${STAGING_LIBDIR}/libjpeg.so \
   INCPNG=${STAGING_INCDIR} \
@@ -32,7 +31,7 @@ do_stage() {
   install -m 0644 ${S}/src/include/mwtypes.h ${STAGING_INCDIR}/
   install -m 0644 ${S}/src/include/nxcolors.h ${STAGING_INCDIR}/
   install -m 0644 ${S}/src/include/nxdraw.h ${STAGING_INCDIR}/
-#  install -m 0755 ${S}/src/lib/*.so ${STAGING_LIBDIR}/
+  install -m 0755 ${S}/src/lib/*.so ${STAGING_LIBDIR}/
   install -m 0644 ${S}/src/lib/*.a ${STAGING_LIBDIR}/
 }
 
