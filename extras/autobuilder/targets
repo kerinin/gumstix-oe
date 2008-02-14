@@ -24,6 +24,8 @@ console-tools
 coreutils
 curl
 dhcp
+dhcpcd
+dnsmasq
 esmtp
 fbgrab
 fbset
@@ -59,14 +61,17 @@ nano
 navit
 ncurses
 net-tools
+nmap
 openssh
 openssl
 php
 pine
+ppp
 python
 qtopia-core
 ruby
 screen
+shorewall
 sqlite
 strace
 wget
