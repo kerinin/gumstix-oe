@@ -20,6 +20,7 @@ bootchart
 bridge-utils
 cherokee
 ckermit
+classpath
 console-tools
 coreutils
 curl
@@ -74,5 +75,6 @@ screen
 shorewall
 sqlite
 strace
+tcpdump
 wget
 
