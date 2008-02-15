@@ -71,7 +71,7 @@ case "$1" in
 # if you have an older gumstix motherboard with a ROK bluetooth module
 # uncomment the following line
 #  echo "GPIO out set" >/proc/gpio/GPIO7
-  echo "AF3 out" > /proc/gpio/GPIO9
+  echo "AF1 out" > /proc/gpio/GPIO12
                                                                       
   echo "AF1 in"  > /proc/gpio/GPIO42                              
   echo "AF2 out" > /proc/gpio/GPIO43                             
