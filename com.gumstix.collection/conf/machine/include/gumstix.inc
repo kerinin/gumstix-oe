@@ -31,6 +31,8 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= " \
 # The following *should* be in a distro.conf file
 # We include them here to avoid creating a new distro
 
+PREFERRED_PROVIDER_classpath = "classpath"
+
 PREFERRED_VERSION_gumstix-kernel = "2.6.21"
 PREFERRED_VERSION_udev = "115"
 PREFERRED_VERSION_gnuplot = "4.0.0"
@@ -43,4 +45,6 @@ PREFERRED_VERSION_bluez-gstreamer-plugin = "3.24"
 PREFERRED_VERSION_bluez-hcidump = "1.40"
 PREFERRED_VERSION_microwindows = "0.91"
 PREFERRED_VERSION_midori = "0.0.15"
+PREFERRED_VERSION_classpath = "0.95"
+
 SRCREV_pn-webkit-gtk = "28656"
