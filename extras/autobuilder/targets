@@ -9,12 +9,6 @@ gumstix-midori-image
 acct
 alsa-utils
 alsa-plugins
-angstrom-gpe-task-apps
-angstrom-gpe-task-base
-angstrom-gpe-task-game
-angstrom-gpe-task-pim
-angstrom-gpe-task-settings
-angstrom-x11-base-depends
 aumix
 bash
 bash-completion
@@ -81,6 +75,7 @@ screen
 shorewall
 sqlite
 strace
+task-gpe
 tcpdump
 wget
 
