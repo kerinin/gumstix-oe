@@ -6,7 +6,7 @@ gumstix-perl-image
 gumstix-qtopia-console-image
 gumstix-qtopia-gui-image
 gumstix-x11-image
-gumstix-midori-image
+gumstix-x11-32mb-image
 acct
 alsa-utils
 alsa-plugins
@@ -56,6 +56,7 @@ ltrace
 madplay
 mailx
 microwindows-snapshot
+midori
 minicom
 msmtp
 mysql
