@@ -1,10 +1,14 @@
 DESCRIPTION = "Library which can be used to write a source client like ices"
 HOMEPAGE = "http://www.icecast.org"
-DEPENDS = "speex libtheora libvorbis libogg"
+DEPENDS = "libvorbis libogg"
 LICENSE = "LGPL"
 
+PR = "r1"
+
 SRC_URI = "http://downloads.us.xiph.org/releases/libshout/libshout-${PV}.tar.gz \
-           file://no-host-includes.ac;patch=1 "
+           file://no-host-includes.ac;patch=1 \
+           file://disable-theora-speex.patch;patch=1 \
+          "
 
 inherit autotools
 
