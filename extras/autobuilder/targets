@@ -37,6 +37,7 @@ gcc
 gd
 gdb
 gettext
+glibc
 gnuplot
 gnutls
 gpsbabel
@@ -80,5 +81,6 @@ sqlite
 strace
 task-gpe
 tcpdump
+uclibc
 wget
 
