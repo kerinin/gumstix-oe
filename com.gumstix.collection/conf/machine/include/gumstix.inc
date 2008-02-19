@@ -46,5 +46,7 @@ PREFERRED_VERSION_bluez-hcidump = "1.40"
 PREFERRED_VERSION_microwindows = "0.91"
 PREFERRED_VERSION_midori = "0.0.15"
 PREFERRED_VERSION_classpath = "0.95"
+PREFERRED_VERSION_qtopia-core = "4.3.3"
+PREFERRED_VERSION_uicmoc4-native = "4.3.3"
 
 SRCREV_pn-webkit-gtk = "28656"
