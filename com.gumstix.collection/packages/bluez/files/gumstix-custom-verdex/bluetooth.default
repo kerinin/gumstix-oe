@@ -1,5 +1,8 @@
 # Bluetooth configuraton file
 
+# Attach to the onboard bluetooth adapter  (allowed values are "true" and "false")
+HCIATTACH_ENABLE=true
+
 # Start of hcid (allowed values are "true" and "false")
 HCID_ENABLE=true
 
