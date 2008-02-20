@@ -53,12 +53,14 @@ iptables
 iputils
 jamvm
 jpeg
+libshout
 ltrace
 madplay
 mailx
 microwindows-snapshot
 midori
 minicom
+mono-mcs-intermediate
 mono
 msmtp
 mysql
