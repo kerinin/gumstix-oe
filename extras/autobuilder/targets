@@ -14,6 +14,7 @@ aumix
 bash
 bash-completion
 bind
+binutils
 bluez-hcidump
 bluez-gstreamer-plugin
 bluez-utils-alsa
@@ -49,6 +50,7 @@ gst-plugins-good
 gst-plugins-bad
 gst-plugins-ugly
 gzip
+icu
 iozone
 iperf
 iptables
@@ -57,6 +59,8 @@ jamvm
 jikes
 jpeg
 libshout
+libsexy
+libxslt
 lmbench
 ltrace
 madplay
@@ -91,12 +95,13 @@ qtopia-core
 ruby
 screen
 shorewall
-sqlite
+sqlite3
 strace
 task-gpe
 tcpdump
 tzcode
 tzdata
 uclibc
+webkit-gtk
 wget
 
