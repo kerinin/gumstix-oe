@@ -84,6 +84,7 @@ do_install_append() {
 
 	install -m 0644 ${WORKDIR}/hcid.conf         ${D}${sysconfdir}/bluetooth/
 	install -m 0644 ${WORKDIR}/rfcomm.conf       ${D}${sysconfdir}/bluetooth/
+	install -m 0644 ${WORKDIR}/input.service     ${D}${sysconfdir}/bluetooth/
 	install -m 0644 ${WORKDIR}/bluetooth.default ${D}${sysconfdir}/default/bluetooth
 	install -m 0755 ${WORKDIR}/bluetooth.init    ${D}${sysconfdir}/init.d/bluetooth
 

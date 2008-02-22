@@ -16,7 +16,7 @@ SDPD_ENABLE=true
 HIDD_ENABLE=true
 
 # Arguments to hidd
-HIDD_OPTIONS=""
+#HIDD_OPTIONS=""
 
 # Run hid2hci (allowed values are "true" and "false")
 HID2HCI_ENABLE=true

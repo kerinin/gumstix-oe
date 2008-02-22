@@ -17,6 +17,7 @@ DESC="Bluetooth subsystem"
 HCIATTACH_NAME=hciattach
 DAEMON_NAME=hcid
 HID2HCI_NAME=hid2hci
+HIDD_NAME=hidd
 RFCOMM_NAME=rfcomm
 RFCOMM_GETTY_NAME=rfcomm-getty
 PAND_NAME=pand
@@ -25,18 +26,21 @@ DUND_NAME=dund
 HCIATTACH_EXEC="`which $HCIATTACH_NAME || true`"
 DAEMON_EXEC="`which $DAEMON_NAME || true`"
 HID2HCI_EXEC="`which $HID2HCI_NAME || true`"
+HIDD_EXEC="`which $HIDD_NAME || true`"
 RFCOMM_EXEC="`which $RFCOMM_NAME || true`"
 PAND_EXEC="`which $PAND_NAME || true`"
 DUND_EXEC="`which $DUND_NAME || true`"
 
 DAEMON_ENABLE=true
 HID2HCI_ENABLE=false
+HIDD_ENABLED=false
 RFCOMM_ENABLE=true
 DUND_ENABLE=false
 PAND_ENABLE=false
 
 DUND_OPTIONS=""
 PAND_OPTIONS=""
+HIDD_OPTIONS="--master --server"
 
 DAEMON_CONFIG="/etc/bluetooth/hcid.conf"
 RFCOMM_CONFIG="/etc/bluetooth/rfcomm.conf"
@@ -100,10 +104,16 @@ case "$1" in
 		$PAND_EXEC $PAND_OPTIONS
 		echo -n " $PAND_NAME"
 	fi
+  if $HIDD_ENABLE && [ -x "$HIDD_EXEC" ] ; then
+    $HIDD_EXEC $HIDD_OPTIONS
+    echo -n " $HIDD_NAME"
+  fi
 	echo "."
 	;;
   stop)
 	echo -n "Stopping $DESC:"
+  killall $HIDD_NAME > /dev/null 2>&1 || true
+  echo -n " $HIDD_NAME"
 	killall $PAND_NAME > /dev/null 2>&1 || true
 	echo -n " $PAND_NAME"
 	killall $DUND_NAME > /dev/null 2>&1 || true
