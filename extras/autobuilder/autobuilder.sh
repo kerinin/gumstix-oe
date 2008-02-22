@@ -50,6 +50,9 @@ then
       bitbake -c clean gettext
       bitbake -c clean glib-2.0
       bitbake -c clean libiconv
+      bitbake -c clean libtool-cross
+      bitbake -c clean qmake-native
+      bitbake -c clean qmake2-native      
     done
     svn revert build/conf/local.conf
   done
@@ -63,6 +66,7 @@ then
   for libc in $BUILD_LIBC
   do
     rm     $OE_FEED/archive/$REVISION/$libc/ipk/Packages*
+    rm -rf $OE_FEED/archive/$REVISION/$libc/ipk/armv5te/morgue
     rm -rf $OE_FEED/archive/$REVISION/$libc/ipk/i686
     for machine in $BUILD_MACHINES
     do
