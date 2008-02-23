@@ -51,7 +51,7 @@ gst-plugins-bad
 gst-plugins-ugly
 gzip
 icu
-iozone
+iozone3
 iperf
 iptables
 iputils
@@ -81,7 +81,6 @@ mysql
 nano
 navit
 ncurses
-netperf
 net-tools
 nmap
 opkg-ipkg-compat
@@ -99,7 +98,6 @@ sqlite3
 strace
 task-gpe
 tcpdump
-tzcode
 tzdata
 uclibc
 webkit-gtk

@@ -46,6 +46,8 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
        file://gumstix-pxa270-mmc.patch;patch=1 \
        file://pxafb-18bpp-mode.patch;patch=1 \
        file://smc911x-fixup.patch;patch=1 \
+       file://smc91x-longer-timeout.patch;patch=1 \
+       file://pxafb-backto16.patch;patch=1 \
        "
 
 do_configure_prepend() {
