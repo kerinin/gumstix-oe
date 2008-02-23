@@ -42,7 +42,6 @@ IMAGE_INSTALL += " \
     minilite \
     minimix \
     xmonobut \
-    midori \
     "
 
 #ROOTFS_POSTPROCESS_COMMAND += '${@base_conditional("DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
