@@ -62,16 +62,34 @@ then
   mkdir -p $OE_FEED/archive/$REVISION
   cp -rf tmp/deploy/* $OE_FEED/archive/$REVISION
 
-  # Cleanout stuff not needed in feed
   for libc in $BUILD_LIBC
   do
+    # Cleanout stuff not needed in feed
     rm     $OE_FEED/archive/$REVISION/$libc/ipk/Packages*
     rm -rf $OE_FEED/archive/$REVISION/$libc/ipk/armv5te/morgue
     rm -rf $OE_FEED/archive/$REVISION/$libc/ipk/i686
+
     for machine in $BUILD_MACHINES
     do
       rm     $OE_FEED/archive/$REVISION/$libc/images/$machine/modules*
     done
+
+    # Create Packages.gz for feeds
+    cd $OE_FEED/archive/$REVISION/$libc/ipk/all
+    $GUMSTIXTOP/tmp/staging/i686-linux/bin/ipkg-make-index . > Packages
+    gzip -f Packages
+
+    cd $OE_FEED/archive/$REVISION/$libc/ipk/armv5te
+    $GUMSTIXTOP/tmp/staging/i686-linux/bin/ipkg-make-index . > Packages
+    gzip -f Packages
+
+    for machine in $BUILD_MACHINES
+    do
+      cd $OE_FEED/archive/$REVISION/$libc/ipk/$machine
+      $GUMSTIXTOP/tmp/staging/i686-linux/bin/ipkg-make-index . > Packages
+      gzip -f Packages
+    done
+
   done
   
   cd $OE_FEED
