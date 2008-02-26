@@ -1,6 +1,6 @@
 DESCRIPTION = "Use machine options to create a basic gumstix machine task/package"
 
-PR = "r6"
+PR = "r7"
 
 inherit task
 
@@ -225,6 +225,10 @@ RDEPENDS_task-base-gumstix-ethernet = "\
 RRECOMMENDS_task-base-gumstix-ethernet = "\
     kernel-module-smc91x \
     kernel-module-smc911x \
+    "
+
+RDEPENDS_task-base-gumstix-fat = "\
+    dosfstools \
     "
 
 RRECOMMENDS_task-base-gumstix-fat = "\

@@ -35,6 +35,7 @@ curl
 dhcp
 dhcpcd
 dnsmasq
+dosfstools
 esmtp
 fbgrab
 fbset
