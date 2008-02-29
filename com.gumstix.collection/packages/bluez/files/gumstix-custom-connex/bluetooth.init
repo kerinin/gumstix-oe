@@ -72,11 +72,13 @@ case "$1" in
 	/sbin/modprobe gumstix_bluetooth
 	/sbin/modprobe proc_gpio
 
-# if you have an older gumstix motherboard with a ROK bluetooth module
-# uncomment the following line
-#  echo "GPIO out set" >/proc/gpio/GPIO7
   echo "AF1 out" > /proc/gpio/GPIO12
                                                                       
+  echo GPIO out clear >/proc/gpio/GPIO7
+  sleep 1
+  echo GPIO out set >/proc/gpio/GPIO7
+  sleep 1
+
   echo "AF1 in"  > /proc/gpio/GPIO42                              
   echo "AF2 out" > /proc/gpio/GPIO43                             
   echo "AF1 in"  > /proc/gpio/GPIO44                              
