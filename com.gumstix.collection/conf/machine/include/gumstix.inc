@@ -32,6 +32,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= " \
 # We include them here to avoid creating a new distro
 
 PREFERRED_PROVIDER_classpath = "classpath"
+PREFERRED_PROVIDER_bluez-utils-dbus = "bluez-utils"
 
 PREFERRED_VERSION_gumstix-kernel = "2.6.21"
 PREFERRED_VERSION_udev = "115"
