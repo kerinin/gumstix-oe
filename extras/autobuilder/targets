@@ -31,6 +31,7 @@ ckermit
 classpath
 console-tools
 coreutils
+cups
 curl
 dhcp
 dhcpcd
@@ -96,6 +97,7 @@ openssl
 php
 pine
 ppp
+procps
 python
 qtopia-core
 ruby
