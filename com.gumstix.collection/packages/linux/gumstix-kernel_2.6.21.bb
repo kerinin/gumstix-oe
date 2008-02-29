@@ -1,7 +1,7 @@
 require gumstix-linux.inc
 
 SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
-       ${@base_contains('MACHINE_FEATURES', 'lcd','file://defconfig', 'file://defconfig-nofb',d)} \
+       file://defconfig \
        file://tsc2003.c \
        file://tsc2003-config.diff;patch=1 \
        file://pxa-regs-additions.patch;patch=1 \
@@ -47,9 +47,28 @@ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
        file://pxafb-18bpp-mode.patch;patch=1 \
        file://smc911x-fixup.patch;patch=1 \
        file://smc91x-fail-if-no-chip.patch;patch=1 \
+       ${@base_contains('MACHINE_FEATURES', 'rgb16','file://pxafb-backto16.patch;patch=1', '',d)} \
        "
 
 do_configure_prepend() {
-       ${@base_contains('MACHINE_FEATURES', 'lcd','','mv ${WORKDIR}/defconfig-nofb ${WORKDIR}/defconfig',d)}
+
+       # turn off frame buffer support in kernel if lcd MACHINE_FEATURES not defined    
+       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FB=y/# CONFIG_FB is not set/" ${WORKDIR}/defconfig',d)}
+       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FB_PXA=y/# CONFIG_FB_PXA is not set/" ${WORKDIR}/defconfig',d)}
+       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FRAMEBUFFER_CONSOLE=y/# CONFIG_FRAMEBUFFER_CONSOLE is not set/" ${WORKDIR}/defconfig',d)}
+       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_LOGO=y/# CONFIG_LOGO is not set/" ${WORKDIR}/defconfig',d)}
+
+       # if mmc-root MACHINE_FEATURES requested disable jffs2 and enable mmc and ext2 support in kernel
+       ${@base_contains('MACHINE_FEATURES', 'mmc-root','sed -i "s/CONFIG_JFFS2_FS=y/# CONFIG_JFFS2_FS is not set/" ${WORKDIR}/defconfig','',d)}
+       ${@base_contains('MACHINE_FEATURES', 'mmc-root','sed -i "s/CONFIG_EXT2_FS=m/CONFIG_EXT2_FS=y/" ${WORKDIR}/defconfig','',d)}
+       ${@base_contains('MACHINE_FEATURES', 'mmc-root','sed -i "s/CONFIG_MMC=m/CONFIG_MMC=y/" ${WORKDIR}/defconfig','',d)}
+       ${@base_contains('MACHINE_FEATURES', 'mmc-root','sed -i "s/CONFIG_MMC_PXA=m/CONFIG_MMC_PXA=y/" ${WORKDIR}/defconfig','',d)} 
+       ${@base_contains('MACHINE_FEATURES', 'mmc-root','sed -i "s/CONFIG_MMC_BLOCK=m/CONFIG_MMC_BLOCK=y/" ${WORKDIR}/defconfig','',d)} 
+
+       # if cf-root MACHINE_FEATURES requested disable jffs2 and enable pcmcia and ext2 support in kernel
+       ${@base_contains('MACHINE_FEATURES', 'cf-root','sed -i "s/CONFIG_JFFS2_FS=y/# CONFIG_JFFS2_FS is not set/" ${WORKDIR}/defconfig','',d)}
+       ${@base_contains('MACHINE_FEATURES', 'cf-root','sed -i "s/CONFIG_EXT2_FS=m/CONFIG_EXT2_FS=y/" ${WORKDIR}/defconfig','',d)}
+       ${@base_contains('MACHINE_FEATURES', 'cf-root','sed -i "s/CONFIG_PCMCIA=m=m/CONFIG_PCMCIA=m=y/" ${WORKDIR}/defconfig','',d)}
+
        cp ${WORKDIR}/tsc2003.c ${S}/drivers/i2c/chips/
 }
