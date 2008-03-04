@@ -1,6 +1,6 @@
 DESCRIPTION = "Use machine options to create a basic gumstix machine task/package"
 
-PR = "r7"
+PR = "r8"
 
 inherit task
 
@@ -130,14 +130,14 @@ RDEPENDS_task-base-gumstix-pcmcia = "\
     "
 
 RRECOMMENDS_task-base-gumstix-pcmcia = "\
-    kernel-module-pcmcia \
-    kernel-module-pxa2xx-core \
-    kernel-module-pxa2xx-cs \
+    ${@base_contains('MACHINE_FEATURES', 'cfroot', '', 'kernel-module-pcmcia',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'cfroot', '', 'kernel-module-pxa2xx-core',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'cfroot', '', 'kernel-module-pxa2xx-cs',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'cfroot', '', 'kernel-module-ide-cs',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'cfroot', '', 'kernel-module-ide-disk',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'cfroot', '', 'kernel-module-ide-generic',d)} \
     kernel-module-serial-cs \
     kernel-module-pcnet-cs \
-    kernel-module-ide-cs \
-    kernel-module-ide-disk \
-    kernel-module-ide-generic \
     kernel-module-firmware-class \
     "
 
@@ -145,8 +145,8 @@ RDEPENDS_task-base-gumstix-mmc = "\
     "
 
 RRECOMMENDS_task-base-gumstix-mmc = "\
-    kernel-module-pxamci \
-    kernel-module-mmc-block \
+    ${@base_contains('MACHINE_FEATURES', 'mmcroot', '', 'kernel-module-pxamci',d)} \
+    ${@base_contains('MACHINE_FEATURES', 'mmcroot', '', 'kernel-module-mmc-block',d)} \
     "
 
 RDEPENDS_task-base-gumstix-serial = "\
