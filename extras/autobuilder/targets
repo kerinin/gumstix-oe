@@ -7,6 +7,7 @@ gumstix-qtopia-console-image
 gumstix-qtopia-gui-image
 gumstix-x11-image
 gumstix-x11-32mb-image
+gumstix-x11-full-image
 acct
 alsa-utils
 alsa-plugins
