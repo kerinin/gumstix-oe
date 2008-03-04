@@ -35,7 +35,7 @@ PREFERRED_PROVIDER_classpath = "classpath"
 PREFERRED_PROVIDER_bluez-utils-dbus = "bluez-utils"
 
 PREFERRED_VERSION_gumstix-kernel = "2.6.21"
-PREFERRED_VERSION_udev = "115"
+PREFERRED_VERSION_udev = "118"
 PREFERRED_VERSION_gnuplot = "4.0.0"
 PREFERRED_VERSION_dropbear = "0.47"
 PREFERRED_VERSION_wpa-supplicant = "0.5.8"
