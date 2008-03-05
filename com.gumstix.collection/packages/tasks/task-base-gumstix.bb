@@ -1,6 +1,6 @@
 DESCRIPTION = "Use machine options to create a basic gumstix machine task/package"
 
-PR = "r8"
+PR = "r9"
 
 inherit task
 
@@ -190,6 +190,7 @@ RRECOMMENDS_task-base-gumstix-usbhost = "\
     kernel-module-scsi-mod \
     kernel-module-usbserial \
     kernel-module-ftdi-sio \
+    kernel-module-cdc-acm \
     kernel-module-usb-storage \
     kernel-module-usbhid \
     kernel-module-usbmouse \
