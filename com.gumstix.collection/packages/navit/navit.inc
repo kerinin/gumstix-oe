@@ -2,7 +2,8 @@ DESCRIPTION = "Navit is a car navigation system with routing engine."
 LICENSE = "GPL"
 SECTION = "x11/applications"
 DEPENDS = "glib-2.0 gtk+"
-RRECOMMENDS = "gpsd speechd flite"
+#RRECOMMENDS = "gpsd speechd flite"
+RRECOMMENDS = "gpsd"
 
 inherit autotools
 

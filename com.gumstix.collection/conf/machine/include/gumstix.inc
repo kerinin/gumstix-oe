@@ -50,5 +50,9 @@ PREFERRED_VERSION_jamvm = "1.5.0"
 PREFERRED_VERSION_classpath = "0.96"
 PREFERRED_VERSION_qtopia-core = "4.3.3"
 PREFERRED_VERSION_uicmoc4-native = "4.3.3"
+PREFERRED_VERSION_navit = "0.0.4"
 
 SRCREV_pn-webkit-gtk = "28656"
+SRCREV_pn-opkg = "4142"
+SRCREV_pn-opkg-native = "4142"
+
