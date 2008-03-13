@@ -16,6 +16,7 @@ BUILD_LIBC=" \
 BUILD_MACHINES=" \
                 gumstix-custom-verdex \
                 gumstix-custom-connex \
+                gumstix-custom-basix \
                "
 
 cd $GUMSTIXTOP
@@ -97,7 +98,7 @@ then
   ln -s $OE_FEED/archive/$REVISION current
   
 # use for syncing to remote server
-  ftpsyncup
+#  ftpsyncup
 
 fi
 
