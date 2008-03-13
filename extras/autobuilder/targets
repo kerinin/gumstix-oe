@@ -100,7 +100,6 @@ pine
 ppp
 procps
 python
-python-pygtk
 qtopia-core
 ruby
 screen
@@ -108,6 +107,8 @@ shorewall
 sqlite3
 strace
 task-gpe
+task-python-everything
+task-sdk-base
 tcpdump
 tzdata
 uclibc
