@@ -15,12 +15,15 @@ FILES_${PN}-dbg += "${libdir}/${PN}/*/.debug"
 FILES_${PN}-dev += "${libdir}/${PN}/*/*.so ${libdir}/${PN}/*/*.la"
 
 SRC_URI_append = " \
-                  file://navit.xml-so.patch;patch=1 \
+                  file://navit.xml \
                   file://navit.desktop \
                   file://navit.launcher \
 	  	 "
 
 do_install_append() {
+        install -d ${D}${datadir}/navit/
+        install -m 0644 ${WORKDIR}/navit.xml ${D}${datadir}/navit/
+
         install -d ${D}${datadir}/applications/
         install -m 0644 ${WORKDIR}/navit.desktop ${D}${datadir}/applications/
 
