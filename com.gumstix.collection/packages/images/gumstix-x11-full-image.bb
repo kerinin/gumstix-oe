@@ -2,7 +2,7 @@
 
 require gumstix-basic-image.bb
 
-PR="r0"
+PR = "r3"
 
 IMAGE_INSTALL += " \
   angstrom-gpe-task-apps \
@@ -12,6 +12,8 @@ IMAGE_INSTALL += " \
   angstrom-gpe-task-settings \
   angstrom-x11-base-depends \
   midori \
+  navit \
+  gsmd \
  "
 
 #ROOTFS_POSTPROCESS_COMMAND += '${@base_conditional("DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
