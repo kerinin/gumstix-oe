@@ -53,6 +53,7 @@ gnutls
 gpsbabel
 gpsd
 grep
+gsmd
 gstreamer
 gst-plugins-base
 gst-plugins-good

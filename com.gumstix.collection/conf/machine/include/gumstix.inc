@@ -33,6 +33,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= " \
 
 PREFERRED_PROVIDER_classpath = "classpath"
 PREFERRED_PROVIDER_bluez-utils-dbus = "bluez-utils"
+PREFERRED_PROVIDER_gsmd="libgsmd"
 
 PREFERRED_VERSION_gumstix-kernel = "2.6.21"
 PREFERRED_VERSION_udev = "118"
@@ -55,4 +56,6 @@ PREFERRED_VERSION_navit = "0.0.4"
 SRCREV_pn-webkit-gtk = "30762"
 SRCREV_pn-opkg = "4142"
 SRCREV_pn-opkg-native = "4142"
+SRCREV_pn-libgsmd = "3684"
+SRCREV_pn-libgsmd-devel = "3293"
 
