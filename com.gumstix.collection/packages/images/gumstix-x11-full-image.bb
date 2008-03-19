@@ -13,7 +13,8 @@ IMAGE_INSTALL += " \
   angstrom-x11-base-depends \
   midori \
   navit \
-  gsmd \
+  libgsmd \
+  libgsmd-tools \
  "
 
 #ROOTFS_POSTPROCESS_COMMAND += '${@base_conditional("DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
