@@ -20,7 +20,7 @@ COMBINED_FEATURES ?= ""
 IMAGE_FSTYPES = "jffs2 tar.gz"
 EXTRA_IMAGECMD_jffs2 = "--little-endian --eraseblock=0x20000 --squash-uids"
 
-SERIAL_CONSOLE = "115200 ttyS0 vt100"
+SERIAL_CONSOLE ?= "115200 ttyS0 vt100"
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS =     " \
                                        "
