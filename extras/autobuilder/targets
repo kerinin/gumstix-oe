@@ -105,6 +105,7 @@ qtopia-core
 ruby
 screen
 shorewall
+snmp++
 sqlite3
 strace
 task-gpe
