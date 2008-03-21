@@ -54,9 +54,9 @@ do_configure_prepend() {
        cp ${WORKDIR}/tsc2003.c ${S}/drivers/i2c/chips/
 
        # turn off frame buffer support in kernel if lcd MACHINE_FEATURES not defined    
-       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FB=y/# CONFIG_FB is not set/" ${WORKDIR}/defconfig',d)}
-       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FB_PXA=y/# CONFIG_FB_PXA is not set/" ${WORKDIR}/defconfig',d)}
-       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FRAMEBUFFER_CONSOLE=y/# CONFIG_FRAMEBUFFER_CONSOLE is not set/" ${WORKDIR}/defconfig',d)}
+       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FB=m/# CONFIG_FB is not set/" ${WORKDIR}/defconfig',d)}
+       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FB_PXA=m/# CONFIG_FB_PXA is not set/" ${WORKDIR}/defconfig',d)}
+       ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_FRAMEBUFFER_CONSOLE=m/# CONFIG_FRAMEBUFFER_CONSOLE is not set/" ${WORKDIR}/defconfig',d)}
        ${@base_contains('MACHINE_FEATURES', 'lcd','','sed -i "s/CONFIG_LOGO=y/# CONFIG_LOGO is not set/" ${WORKDIR}/defconfig',d)}
 
        # if mmcroot MACHINE_FEATURES requested disable jffs2 and enable mmc and ext2 support in kernel
