@@ -70,7 +70,6 @@ struct tsc2003_data {
 	struct i2c_client client;
 	struct device_driver driver;
 	struct input_dev *idev;
-	struct semaphore sem;
 	struct task_struct *tstask;
 	struct completion tstask_completion;
 	struct completion penirq_completion;
@@ -227,8 +226,6 @@ static int tsc2003ts_thread(void *v) {
       unsigned int x, y, p, fp;
       int pen_is_up = 0;
       
-      down(&d->sem);         
-
       // take the sample
       d->pd = PD_PENIRQ_DISARM;
       tsc2003_read_xpos(d, PD_PENIRQ_DISARM, &x);
@@ -269,8 +266,6 @@ static int tsc2003ts_thread(void *v) {
       // sleep for 3 jiffies to give us about 30 updates/sec
       msleep (3);
 
-      up(&d->sem);
-
 	} while (!signal_pending(tsk));
 
 	d->tstask = NULL;
@@ -281,9 +276,6 @@ static int tsc2003_idev_open(struct input_dev *idev) {
 	struct tsc2003_data *d = idev->private;
 	int ret = 0;
 
-	if (down_interruptible(&d->sem))
-		return -EINTR;
-
 	if (d->tstask)
 		panic(DRIVER_NAME "tsd already running (!). abort.");
 
@@ -293,19 +285,16 @@ static int tsc2003_idev_open(struct input_dev *idev) {
 		ret = 0;
 	}
 
-	up(&d->sem);
 	return ret;
 }
 
 static void tsc2003_idev_close(struct input_dev *idev) {
 	struct tsc2003_data *d = idev->private;
-	down_interruptible(&d->sem);
 	if (d->tstask) {
 		send_sig(SIGKILL, d->tstask, 1);
 		wait_for_completion(&d->tstask_completion);
 	}
 
-	up(&d->sem);
 	return;
 }
 
@@ -318,8 +307,6 @@ static int tsc2003_driver_register(struct tsc2003_data *data) {
 	struct input_dev *idev;
 	int ret = 0;
 	int error;
-
-	init_MUTEX(&data->sem);
 
 	error = tsc2003_detect_irq(data);
 	if (error) {
