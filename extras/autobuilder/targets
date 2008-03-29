@@ -68,9 +68,12 @@ iputils
 jamvm
 jikes
 jpeg
-libshout
+lame
+libsdl-x11
 libsexy
+libshout
 libxslt
+libxv
 lmbench
 ltrace
 madplay
@@ -85,6 +88,7 @@ mono-mcs-intermediate
 mono
 mp3blaster
 mplayer
+mplayer-common
 msmtp
 mutt
 mysql
