@@ -1,6 +1,6 @@
 require bluez-utils3.inc
 
-PR="r3"
+PR="r4"
 
 # see bluez-utils3.inc for the explanation of these option
 EXTRA_OECONF = " \

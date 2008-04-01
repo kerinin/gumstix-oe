@@ -16,6 +16,7 @@ SRC_URI = "http://bluez.sourceforge.net/download/bluez-utils-${PV}.tar.gz \
            file://input.service \
            file://bluez-utils-hciattach-gumstix.patch;patch=1 \
            file://bluez-utils-hciattach-pba31308.patch;patch=1 \
+           file://infineon-startupevent.patch;patch=1 \
           "
 
 S = "${WORKDIR}/bluez-utils-${PV}"
