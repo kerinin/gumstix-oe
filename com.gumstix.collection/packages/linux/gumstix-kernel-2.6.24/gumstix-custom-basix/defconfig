@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux kernel version: 2.6.24
-# Fri Mar 21 11:55:30 2008
+# Mon Mar 24 08:19:02 2008
 #
 CONFIG_ARM=y
 CONFIG_SYS_SUPPORTS_APM_EMULATION=y
@@ -797,7 +797,17 @@ CONFIG_NETDEV_10000=y
 # Wireless LAN
 #
 # CONFIG_WLAN_PRE80211 is not set
-# CONFIG_WLAN_80211 is not set
+CONFIG_WLAN_80211=y
+# CONFIG_PCMCIA_RAYCS is not set
+CONFIG_LIBERTAS=m
+CONFIG_LIBERTAS_CS=m
+CONFIG_LIBERTAS_SDIO=m
+# CONFIG_LIBERTAS_DEBUG is not set
+# CONFIG_HERMES is not set
+# CONFIG_ATMEL is not set
+# CONFIG_AIRO_CS is not set
+# CONFIG_PCMCIA_WL3501 is not set
+# CONFIG_HOSTAP is not set
 # CONFIG_NET_PCMCIA is not set
 # CONFIG_WAN is not set
 CONFIG_PPP=m
@@ -1068,9 +1078,6 @@ CONFIG_FONT_6x11=y
 # CONFIG_FONT_SUN12x22 is not set
 # CONFIG_FONT_10x18 is not set
 # CONFIG_LOGO is not set
-# CONFIG_LOGO_LINUX_MONO is not set
-# CONFIG_LOGO_LINUX_VGA16 is not set
-# CONFIG_LOGO_LINUX_CLUT224 is not set
 
 #
 # Sound
