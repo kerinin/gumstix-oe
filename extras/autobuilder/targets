@@ -38,6 +38,7 @@ dhcp
 dhcpcd
 dnsmasq
 dosfstools
+epdfview
 esmtp
 fbgrab
 fbset
