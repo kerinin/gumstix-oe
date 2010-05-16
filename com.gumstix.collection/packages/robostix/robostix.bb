@@ -7,7 +7,8 @@ DEPENDS = "virtual/kernel"
 
 PR = "r0"
 
-SRC_URI = "svn://svn.gumstix.com/gumstix-buildroot/branches/projects;module=robostix;rev=1588;proto=http \
+#SRC_URI = "svn://svn.gumstix.com/gumstix-buildroot/branches/projects;module=robostix;rev=1588;proto=http \
+SRC_URI = "svn://root:root@svn.gumstix.com/gumstix-buildroot/branches/projects;module=robostix;rev=1588;proto=http \
    file://makefile-rules.patch;patch=1 \
    file://gummake.patch;patch=1 \
    "
@@ -91,17 +92,17 @@ FILES_${PN}-usermode = "${bindir}/robostix"
 PACKAGES += "${PN}-kernel-module"
 FILES_${PN}-kernel-module = "${base_libdir}/modules/${KERNEL_VERSION}/extra/robostix_drv.ko"
 
-PACKAGES += "${PN}-avr-ArgTest"
-FILES_${PN}-avr-ArgTest = "/root/ArgTest.hex"
+PACKAGES += "${PN}-avr-argtest"
+FILES_${PN}-avr-argtest = "/root/ArgTest.hex"
 
-PACKAGES += "${PN}-avr-Flash-LED"
-FILES_${PN}-avr-Flash-LED = "/root/Flash-LED.hex"
+PACKAGES += "${PN}-avr-flash-led"
+FILES_${PN}-avr-flash-led = "/root/Flash-LED.hex"
 
-PACKAGES += "${PN}-avr-i2c-BootLoader"
-FILES_${PN}-avr-i2c-BootLoader = "/root/i2c-Boot-m128-16MHz.hex"
+PACKAGES += "${PN}-avr-i2c-bootloader"
+FILES_${PN}-avr-i2c-bootloader = "/root/i2c-Boot-m128-16MHz.hex"
 
-PACKAGES += "${PN}-avr-i2c-BootLoader-eep"
-FILES_${PN}-avr-i2c-BootLoader-eep = "/root/i2c-Boot-m128-16MHz-eep.hex"
+PACKAGES += "${PN}-avr-i2c-bootboader-eep"
+FILES_${PN}-avr-i2c-bootloader-eep = "/root/i2c-Boot-m128-16MHz-eep.hex"
 
 PACKAGES += "${PN}-avr-i2c-io"
 FILES_${PN}-avr-i2c-io = "/root/i2c-io.hex"
@@ -112,24 +113,24 @@ FILES_${PN}-avr-i2c-test = "/root/i2c-test.hex"
 PACKAGES += "${PN}-avr-int6"
 FILES_${PN}-avr-int6 = "/root/int6.hex"
 
-PACKAGES += "${PN}-avr-LCD-Test"
-FILES_${PN}-avr-LCD-Test = "/root/LCD-Test.hex"
+PACKAGES += "${PN}-avr-lcd-test"
+FILES_${PN}-avr-lcd-test = "/root/LCD-Test.hex"
 
-PACKAGES += "${PN}-avr-QD-Test"
-FILES_${PN}-avr-QD-Test = "/root/QD-Test.hex"
+PACKAGES += "${PN}-avr-qd-test"
+FILES_${PN}-avr-qd-test = "/root/QD-Test.hex"
 
-PACKAGES += "${PN}-avr-RC-Test"
-FILES_${PN}-avr-RC-Test = "/root/RC-Test.hex"
+PACKAGES += "${PN}-avr-rc-test"
+FILES_${PN}-avr-rc-test = "/root/RC-Test.hex"
 
-PACKAGES += "${PN}-avr-Simple-Flasher"
-FILES_${PN}-avr-Simple-Flasher = "/root/Simple-Flasher.hex"
+PACKAGES += "${PN}-avr-simple-flasher"
+FILES_${PN}-avr-simple-flasher = "/root/Simple-Flasher.hex"
 
-PACKAGES += "${PN}-avr-Simple-Servo"
-FILES_${PN}-avr-Simple-Servo = "/root/Simple-Servo.hex"
+PACKAGES += "${PN}-avr-simple-servo"
+FILES_${PN}-avr-simple-servo = "/root/Simple-Servo.hex"
 
-PACKAGES += "${PN}-avr-Simple-Servo-2"
-FILES_${PN}-avr-Simple-Servo-2 = "/root/Simple-Servo-2.hex"
+PACKAGES += "${PN}-avr-simple-servo-2"
+FILES_${PN}-avr-simple-servo-2 = "/root/Simple-Servo-2.hex"
 
-PACKAGES += "${PN}-avr-Tachometer"
-FILES_${PN}-avr-Tachometer = "/root/Tachometer.hex"
+PACKAGES += "${PN}-avr-tachometer"
+FILES_${PN}-avr-tachometer = "/root/Tachometer.hex"
 
