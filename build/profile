@@ -1,0 +1,20 @@
+#
+# Environment setup for oe
+#
+
+export BB_ENV_EXTRAWHITE="MACHINE DISTRO ANGSTROM_MODE VERDEXTOP OEBRANCH USERBRANCH TITOOLSDIR"
+
+export VERDEXTOP="${HOME}/verdex-oe"
+export OEBRANCH="${VERDEXTOP}/org.openembedded.dev"
+export USERBRANCH="${VERDEXTOP}/user.collection"
+
+export PATH="${VERDEXTOP}/bitbake/bin:$PATH"
+export BBPATH="${VERDEXTOP}/build:${USERBRANCH}:${OEBRANCH}"
+
+export TITOOLSDIR="${VERDEXTOP}/ti"
+
+umask 0002
+
+#
+# end oe setup
+#

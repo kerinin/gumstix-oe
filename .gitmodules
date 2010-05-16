@@ -1,0 +1,6 @@
+[submodule "bitbake"]
+	path = bitbake
+	url = git://git.openembedded.net/bitbake
+[submodule "org.openembedded.dev"]
+	path = org.openembedded.dev
+	url = git://gitorious.org/gumstix-oe/mainline.git
