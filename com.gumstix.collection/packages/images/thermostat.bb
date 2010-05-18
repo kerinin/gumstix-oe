@@ -6,6 +6,5 @@ inherit distutils
 
 IMAGE_INSTALL += " \
     uisp \
-    ruby \
     "
 
